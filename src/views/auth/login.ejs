@@ -1,0 +1,116 @@
+<!-- Login Form Card -->
+<div class="auth-card">
+  <div class="auth-header">
+    <div class="auth-logo">
+      <i class="bi bi-hdd-network"></i>
+      Archon DNS
+    </div>
+    <p>Advanced DNS Management System</p>
+  </div>
+  
+  <div class="auth-body">
+    <!-- Alert for errors -->
+    <% if (locals.error) { %>
+      <div class="alert alert-danger" role="alert">
+        <%= error %>
+      </div>
+    <% } %>
+    
+    <!-- Alert for success -->
+    <% if (locals.success) { %>
+      <div class="alert alert-success" role="alert">
+        <%= success %>
+      </div>
+    <% } %>
+
+    <div class="text-center mb-4">
+      <h4>Sign In</h4>
+      <p class="text-muted">Access your Archon DNS dashboard</p>
+    </div>
+
+    <form id="loginForm" action="/api/auth/login" method="POST">
+      <div class="mb-3">
+        <div class="input-group">
+          <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+          <input type="email" class="form-control" id="email" name="email" placeholder="Email address" required autofocus>
+        </div>
+      </div>
+      
+      <div class="mb-3">
+        <div class="input-group">
+          <span class="input-group-text"><i class="bi bi-lock"></i></span>
+          <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+          <span class="input-group-text cursor-pointer">
+            <i class="bi bi-eye toggle-password" toggle="#password"></i>
+          </span>
+        </div>
+      </div>
+      
+      <div class="d-flex justify-content-between mb-4">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="rememberMe" name="rememberMe">
+          <label class="form-check-label" for="rememberMe">Remember me</label>
+        </div>
+        <a href="/forgot-password" class="text-decoration-none">Forgot password?</a>
+      </div>
+      
+      <div class="d-grid">
+        <button type="submit" class="btn btn-auth">Sign In</button>
+      </div>
+    </form>
+
+    <div class="text-center mt-4">
+      <p class="mb-0">Don't have an account? <a href="/register" class="text-decoration-none">Sign up</a></p>
+    </div>
+  </div>
+</div>
+
+<!-- Client-side validation script -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const loginForm = document.getElementById('loginForm');
+    
+    loginForm.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      try {
+        const formData = new FormData(loginForm);
+        const response = await fetch('/api/auth/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            email: formData.get('email'),
+            password: formData.get('password'),
+            rememberMe: formData.get('rememberMe') === 'on'
+          })
+        });
+        
+        const data = await response.json();
+        
+        if (response.ok) {
+          // Store token if available
+          if (data.token) {
+            localStorage.setItem('authToken', data.token);
+          }
+          
+          // Redirect to dashboard
+          window.location.href = '/dashboard';
+        } else {
+          throw new Error(data.message || 'Invalid credentials');
+        }
+      } catch (error) {
+        // Display error message
+        const errorAlert = document.createElement('div');
+        errorAlert.className = 'alert alert-danger alert-dismissible fade show mt-3';
+        errorAlert.innerHTML = `
+          ${error.message}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        `;
+        
+        loginForm.insertAdjacentElement('beforebegin', errorAlert);
+      }
+    });
+  });
+</script>

@@ -1,0 +1,19 @@
+[Unit]
+Description=Archon DNS Server
+After=network.target mongodb.service
+Wants=mongodb.service
+
+[Service]
+Type=simple
+User=ubuntu
+WorkingDirectory=/home/ubuntu/Archon-DNS
+ExecStart=/usr/bin/node src/index.js
+Restart=on-failure
+RestartSec=10
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=archon-dns
+Environment=NODE_ENV=production
+
+[Install]
+WantedBy=multi-user.target

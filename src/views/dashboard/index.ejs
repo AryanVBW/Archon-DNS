@@ -1,0 +1,502 @@
+<!-- Dashboard Overview Cards -->
+<div class="row g-4 mb-4">
+  <!-- Total DNS Queries Card -->
+  <div class="col-md-6 col-lg-3">
+    <div class="card stat-card bg-light">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <div class="text-primary">
+            <i class="bi bi-search fs-3"></i>
+          </div>
+          <span class="badge bg-primary">Today</span>
+        </div>
+        <h5 class="card-title">DNS Queries</h5>
+        <h2 class="stat-value text-primary" id="total-queries">0</h2>
+        <div class="d-flex align-items-center mt-3">
+          <span id="queries-trend" class="badge rounded-pill bg-success-subtle text-success me-2">
+            <i class="bi bi-arrow-up"></i> 0%
+          </span>
+          <small class="text-muted">vs yesterday</small>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Blocked Queries Card -->
+  <div class="col-md-6 col-lg-3">
+    <div class="card stat-card bg-light">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <div class="text-danger">
+            <i class="bi bi-shield-fill-x fs-3"></i>
+          </div>
+          <span class="badge bg-primary">Today</span>
+        </div>
+        <h5 class="card-title">Blocked Queries</h5>
+        <h2 class="stat-value text-danger" id="blocked-queries">0</h2>
+        <div class="d-flex align-items-center mt-3">
+          <span id="blocked-trend" class="badge rounded-pill bg-success-subtle text-success me-2">
+            <i class="bi bi-arrow-up"></i> 0%
+          </span>
+          <small class="text-muted">vs yesterday</small>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- DNS Records Card -->
+  <div class="col-md-6 col-lg-3">
+    <div class="card stat-card bg-light">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <div class="text-success">
+            <i class="bi bi-diagram-3 fs-3"></i>
+          </div>
+          <a href="/dns" class="text-decoration-none">Manage</a>
+        </div>
+        <h5 class="card-title">DNS Records</h5>
+        <h2 class="stat-value text-success" id="dns-records">0</h2>
+        <p class="text-muted mt-3">Total managed records</p>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Block Rules Card -->
+  <div class="col-md-6 col-lg-3">
+    <div class="card stat-card bg-light">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <div class="text-warning">
+            <i class="bi bi-shield-fill-check fs-3"></i>
+          </div>
+          <a href="/blocking" class="text-decoration-none">Manage</a>
+        </div>
+        <h5 class="card-title">Block Rules</h5>
+        <h2 class="stat-value text-warning" id="block-rules">0</h2>
+        <p class="text-muted mt-3">Active blocking rules</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- System Status and Query Graph -->
+<div class="row g-4 mb-4">
+  <!-- Query Graph -->
+  <div class="col-lg-8">
+    <div class="card h-100">
+      <div class="card-header bg-transparent border-0">
+        <div class="d-flex justify-content-between align-items-center">
+          <h5 class="card-title mb-0">Query Activity</h5>
+          <div class="btn-group btn-group-sm" role="group">
+            <button type="button" class="btn btn-outline-secondary active" data-period="day">Day</button>
+            <button type="button" class="btn btn-outline-secondary" data-period="week">Week</button>
+            <button type="button" class="btn btn-outline-secondary" data-period="month">Month</button>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <canvas id="queryChart" height="280"></canvas>
+      </div>
+    </div>
+  </div>
+  
+  <!-- System Status -->
+  <div class="col-lg-4">
+    <div class="card h-100">
+      <div class="card-header bg-transparent border-0">
+        <h5 class="card-title mb-0">System Status</h5>
+      </div>
+      <div class="card-body">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item px-0 d-flex justify-content-between align-items-center">
+            <div>
+              <i class="bi bi-hdd-network me-2 text-primary"></i>
+              DNS Service
+            </div>
+            <span id="dns-status-badge" class="badge rounded-pill bg-success">Running</span>
+          </li>
+          <li class="list-group-item px-0 d-flex justify-content-between align-items-center">
+            <div>
+              <i class="bi bi-globe me-2 text-primary"></i>
+              Web Interface
+            </div>
+            <span class="badge rounded-pill bg-success">Running</span>
+          </li>
+          <li class="list-group-item px-0 d-flex justify-content-between align-items-center">
+            <div>
+              <i class="bi bi-database me-2 text-primary"></i>
+              Database
+            </div>
+            <span id="db-status-badge" class="badge rounded-pill bg-success">Connected</span>
+          </li>
+          <li class="list-group-item px-0 d-flex justify-content-between align-items-center">
+            <div>
+              <i class="bi bi-clock-history me-2 text-primary"></i>
+              Uptime
+            </div>
+            <span id="uptime">0h 0m</span>
+          </li>
+          <li class="list-group-item px-0 d-flex justify-content-between align-items-center">
+            <div>
+              <i class="bi bi-cpu me-2 text-primary"></i>
+              CPU Usage
+            </div>
+            <div class="progress w-50" style="height: 10px;">
+              <div id="cpu-usage" class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+          </li>
+          <li class="list-group-item px-0 d-flex justify-content-between align-items-center">
+            <div>
+              <i class="bi bi-memory me-2 text-primary"></i>
+              Memory Usage
+            </div>
+            <div class="progress w-50" style="height: 10px;">
+              <div id="memory-usage" class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="card-footer bg-transparent border-0">
+        <button id="restartDnsBtn" class="btn btn-sm btn-outline-primary">
+          <i class="bi bi-arrow-clockwise me-1"></i> Restart DNS Service
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Recent Activity and Top Domains -->
+<div class="row g-4">
+  <!-- Recent Activity -->
+  <div class="col-lg-8">
+    <div class="card h-100">
+      <div class="card-header bg-transparent border-0">
+        <div class="d-flex justify-content-between align-items-center">
+          <h5 class="card-title mb-0">Recent DNS Activity</h5>
+          <a href="/logs" class="btn btn-sm btn-outline-primary">View All Logs</a>
+        </div>
+      </div>
+      <div class="card-body p-0">
+        <div class="table-responsive">
+          <table class="table table-hover mb-0">
+            <thead class="table-light">
+              <tr>
+                <th>Time</th>
+                <th>Domain</th>
+                <th>Type</th>
+                <th>Client</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="recent-queries">
+              <tr>
+                <td colspan="5" class="text-center py-3">Loading recent queries...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Top Queries -->
+  <div class="col-lg-4">
+    <div class="card h-100">
+      <div class="card-header bg-transparent border-0">
+        <h5 class="card-title mb-0">Top Domains</h5>
+      </div>
+      <div class="card-body">
+        <div id="top-domains">
+          <div class="text-center py-3">Loading top domains...</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Dashboard Scripts -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    let queryChart = null;
+    
+    // Function to format number with commas
+    function formatNumber(num) {
+      return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+    
+    // Function to format timestamp
+    function formatTime(timestamp) {
+      const date = new Date(timestamp);
+      return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    }
+    
+    // Initialize query chart
+    function initQueryChart(labels, totalData, blockedData) {
+      const ctx = document.getElementById('queryChart').getContext('2d');
+      
+      // Destroy existing chart if it exists
+      if (queryChart) {
+        queryChart.destroy();
+      }
+      
+      queryChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: labels,
+          datasets: [
+            {
+              label: 'Total Queries',
+              data: totalData,
+              borderColor: '#375a7f',
+              backgroundColor: 'rgba(55, 90, 127, 0.1)',
+              borderWidth: 2,
+              fill: true,
+              tension: 0.4
+            },
+            {
+              label: 'Blocked Queries',
+              data: blockedData,
+              borderColor: '#e74c3c',
+              backgroundColor: 'rgba(231, 76, 60, 0.1)',
+              borderWidth: 2,
+              fill: true,
+              tension: 0.4
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          interaction: {
+            mode: 'index',
+            intersect: false
+          },
+          plugins: {
+            legend: {
+              position: 'top',
+              labels: {
+                usePointStyle: true,
+                boxWidth: 6
+              }
+            },
+            tooltip: {
+              displayColors: true
+            }
+          },
+          scales: {
+            x: {
+              ticks: {
+                maxRotation: 0
+              },
+              grid: {
+                display: false
+              }
+            },
+            y: {
+              beginAtZero: true,
+              grid: {
+                color: 'rgba(0, 0, 0, 0.05)'
+              }
+            }
+          }
+        }
+      });
+    }
+    
+    // Function to load dashboard stats
+    async function loadDashboardStats() {
+      try {
+        const response = await fetch('/api/stats/dashboard');
+        const data = await response.json();
+        
+        if (data) {
+          // Update stat cards
+          document.getElementById('total-queries').textContent = formatNumber(data.totalQueries || 0);
+          document.getElementById('blocked-queries').textContent = formatNumber(data.blockedQueries || 0);
+          document.getElementById('dns-records').textContent = formatNumber(data.dnsRecords || 0);
+          document.getElementById('block-rules').textContent = formatNumber(data.blockRules || 0);
+          
+          // Update trends
+          const queriesTrend = document.getElementById('queries-trend');
+          if (data.queriesTrend > 0) {
+            queriesTrend.innerHTML = `<i class="bi bi-arrow-up"></i> ${data.queriesTrend}%`;
+            queriesTrend.className = 'badge rounded-pill bg-success-subtle text-success me-2';
+          } else if (data.queriesTrend < 0) {
+            queriesTrend.innerHTML = `<i class="bi bi-arrow-down"></i> ${Math.abs(data.queriesTrend)}%`;
+            queriesTrend.className = 'badge rounded-pill bg-danger-subtle text-danger me-2';
+          } else {
+            queriesTrend.innerHTML = `<i class="bi bi-dash"></i> ${data.queriesTrend}%`;
+            queriesTrend.className = 'badge rounded-pill bg-secondary-subtle text-secondary me-2';
+          }
+          
+          const blockedTrend = document.getElementById('blocked-trend');
+          if (data.blockedTrend > 0) {
+            blockedTrend.innerHTML = `<i class="bi bi-arrow-up"></i> ${data.blockedTrend}%`;
+            blockedTrend.className = 'badge rounded-pill bg-danger-subtle text-danger me-2';
+          } else if (data.blockedTrend < 0) {
+            blockedTrend.innerHTML = `<i class="bi bi-arrow-down"></i> ${Math.abs(data.blockedTrend)}%`;
+            blockedTrend.className = 'badge rounded-pill bg-success-subtle text-success me-2';
+          } else {
+            blockedTrend.innerHTML = `<i class="bi bi-dash"></i> ${data.blockedTrend}%`;
+            blockedTrend.className = 'badge rounded-pill bg-secondary-subtle text-secondary me-2';
+          }
+          
+          // Update system status
+          document.getElementById('uptime').textContent = data.uptime || '0h 0m';
+          
+          const cpuUsage = document.getElementById('cpu-usage');
+          cpuUsage.style.width = `${data.cpuUsage || 0}%`;
+          cpuUsage.setAttribute('aria-valuenow', data.cpuUsage || 0);
+          
+          const memoryUsage = document.getElementById('memory-usage');
+          memoryUsage.style.width = `${data.memoryUsage || 0}%`;
+          memoryUsage.setAttribute('aria-valuenow', data.memoryUsage || 0);
+          
+          // Update service status
+          const dnsStatusBadge = document.getElementById('dns-status-badge');
+          dnsStatusBadge.className = data.dnsRunning ? 'badge rounded-pill bg-success' : 'badge rounded-pill bg-danger';
+          dnsStatusBadge.textContent = data.dnsRunning ? 'Running' : 'Stopped';
+          
+          const dbStatusBadge = document.getElementById('db-status-badge');
+          dbStatusBadge.className = data.dbConnected ? 'badge rounded-pill bg-success' : 'badge rounded-pill bg-danger';
+          dbStatusBadge.textContent = data.dbConnected ? 'Connected' : 'Disconnected';
+          
+          // Initialize chart with data
+          initQueryChart(data.chartLabels || [], data.chartTotalQueries || [], data.chartBlockedQueries || []);
+          
+          // Recent DNS queries
+          const recentQueries = document.getElementById('recent-queries');
+          if (data.recentQueries && data.recentQueries.length > 0) {
+            let queryHtml = '';
+            data.recentQueries.forEach(query => {
+              queryHtml += `
+                <tr>
+                  <td>${formatTime(query.timestamp)}</td>
+                  <td>${query.domain}</td>
+                  <td>${query.type}</td>
+                  <td>${query.client}</td>
+                  <td>
+                    ${query.blocked ? 
+                      '<span class="badge bg-danger">Blocked</span>' : 
+                      '<span class="badge bg-success">Allowed</span>'
+                    }
+                  </td>
+                </tr>
+              `;
+            });
+            recentQueries.innerHTML = queryHtml;
+          } else {
+            recentQueries.innerHTML = '<tr><td colspan="5" class="text-center py-3">No recent queries found</td></tr>';
+          }
+          
+          // Top domains
+          const topDomains = document.getElementById('top-domains');
+          if (data.topDomains && data.topDomains.length > 0) {
+            let domainsHtml = '';
+            data.topDomains.forEach((domain, index) => {
+              const percentage = (domain.count / data.totalQueries) * 100;
+              domainsHtml += `
+                <div class="mb-3">
+                  <div class="d-flex justify-content-between mb-1">
+                    <span>${index + 1}. ${domain.domain}</span>
+                    <span>${domain.count} queries</span>
+                  </div>
+                  <div class="progress" style="height: 6px;">
+                    <div class="progress-bar" role="progressbar" style="width: ${percentage}%;" aria-valuenow="${percentage}" aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                </div>
+              `;
+            });
+            topDomains.innerHTML = domainsHtml;
+          } else {
+            topDomains.innerHTML = '<div class="text-center py-3">No domain data available</div>';
+          }
+        }
+      } catch (error) {
+        console.error('Error loading dashboard stats:', error);
+      }
+    }
+    
+    // Load stats when page loads
+    loadDashboardStats();
+    
+    // Periodically refresh stats (every 30 seconds)
+    setInterval(loadDashboardStats, 30000);
+    
+    // Time period selector for chart
+    document.querySelectorAll('.btn-group[role="group"] button').forEach(button => {
+      button.addEventListener('click', async function() {
+        // Update active state
+        document.querySelectorAll('.btn-group[role="group"] button').forEach(btn => {
+          btn.classList.remove('active');
+        });
+        this.classList.add('active');
+        
+        // Get data for selected period
+        const period = this.getAttribute('data-period');
+        try {
+          const response = await fetch(`/api/stats/chart?period=${period}`);
+          const data = await response.json();
+          
+          if (data) {
+            initQueryChart(data.labels, data.totalQueries, data.blockedQueries);
+          }
+        } catch (error) {
+          console.error('Error loading chart data:', error);
+        }
+      });
+    });
+    
+    // Handle DNS service restart
+    document.getElementById('restartDnsBtn').addEventListener('click', async function() {
+      if (confirm('Are you sure you want to restart the DNS service?')) {
+        try {
+          this.disabled = true;
+          this.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Restarting...';
+          
+          const response = await fetch('/api/stats/restart-dns', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          });
+          
+          const data = await response.json();
+          
+          if (data.success) {
+            // Show success message
+            const alertElement = document.createElement('div');
+            alertElement.className = 'alert alert-success alert-dismissible fade show mt-3';
+            alertElement.innerHTML = `
+              DNS service restarted successfully.
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            `;
+            
+            document.querySelector('.main-content').insertAdjacentElement('afterbegin', alertElement);
+            
+            // Wait and refresh stats
+            setTimeout(() => {
+              loadDashboardStats();
+            }, 3000);
+          } else {
+            throw new Error(data.message || 'Failed to restart DNS service');
+          }
+        } catch (error) {
+          // Show error message
+          const alertElement = document.createElement('div');
+          alertElement.className = 'alert alert-danger alert-dismissible fade show mt-3';
+          alertElement.innerHTML = `
+            Error restarting DNS service: ${error.message}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          `;
+          
+          document.querySelector('.main-content').insertAdjacentElement('afterbegin', alertElement);
+        } finally {
+          // Reset button
+          this.disabled = false;
+          this.innerHTML = '<i class="bi bi-arrow-clockwise me-1"></i> Restart DNS Service';
+        }
+      }
+    });
+  });
+</script>
