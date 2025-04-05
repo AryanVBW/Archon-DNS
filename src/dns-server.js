@@ -296,7 +296,14 @@ class DnsServer {
   }
   
   handleListening() {
-    const port = this.server.socket.address().port;
+    let port = config.dns.port;
+    if (this.server && this.server.socket) {
+      try {
+        port = this.server.socket.address().port;
+      } catch (err) {
+        logger.warn(`Could not get socket address: ${err.message}`);
+      }
+    }
     logger.info(`DNS server listening on port ${port}`);
     this.isRunning = true;
   }
@@ -339,9 +346,18 @@ class DnsServer {
   }
   
   getStatus() {
+    let port = config.dns.port;
+    if (this.isRunning && this.server && this.server.socket) {
+      try {
+        port = this.server.socket.address().port;
+      } catch (err) {
+        logger.warn(`Could not get socket address in getStatus: ${err.message}`);
+      }
+    }
+    
     return {
       running: this.isRunning,
-      port: this.isRunning ? this.server.socket.address().port : config.dns.port,
+      port: port,
       cacheSize: this.cache.size,
       cacheEnabled: config.dns.cache.enabled,
       upstreamServers: [

@@ -1,0 +1,18 @@
+2025-04-05 16:53:15 info: Starting Archon DNS...
+2025-04-05 16:53:15 info: DNS server closed
+2025-04-05 16:53:15 error: Uncaught Exception: Cannot read properties of undefined (reading 'address')
+2025-04-05 16:53:15 error: TypeError: Cannot read properties of undefined (reading 'address')
+    at DnsServer.handleListening (/Volumes/DATA_vivek/GITHUB/Archon-DNS/src/dns-server.js:299:37)
+    at DNSServer.emit (node:events:517:28)
+    at /Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/dns2/server/dns.js:33:12
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-04-05 16:53:15 info: Shutting down Archon DNS...
+2025-04-05 16:53:20 warn: MongoDB disconnected
+2025-04-05 16:53:37 info: Starting Archon DNS...
+2025-04-05 16:53:37 info: DNS server closed
+2025-04-05 16:53:37 info: DNS server listening on port 53
+2025-04-05 16:53:42 warn: MongoDB disconnected
+2025-04-05 16:54:02 info: Starting Archon DNS...
+2025-04-05 16:54:02 info: DNS server closed
+2025-04-05 16:54:02 info: DNS server listening on port 53
+2025-04-05 16:54:07 warn: MongoDB disconnected

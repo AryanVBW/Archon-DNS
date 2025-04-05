@@ -164,7 +164,8 @@ router.get('/me', authMiddleware, async (req, res) => {
   }
 });
 
-// Export the auth middleware for use in other routes
-module.exports.authMiddleware = authMiddleware;
-// Export the router
+// Add the authMiddleware to the router object
+router.authMiddleware = authMiddleware;
+
+// Export the router with the attached middleware
 module.exports = router;
