@@ -1,0 +1,408 @@
+<%- contentFor('title') %>
+DNS Records - Archon DNS
+
+<%- contentFor('body') %>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <h5 class="mb-0">DNS Records</h5>
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addRecordModal">
+            <i class="bi bi-plus-circle me-1"></i> Add Record
+          </button>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-striped table-hover" id="dnsRecordsTable">
+              <thead>
+                <tr>
+                  <th>Domain</th>
+                  <th>Type</th>
+                  <th>Value</th>
+                  <th>TTL</th>
+                  <th>Created</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Records will be loaded here via JavaScript -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Add Record Modal -->
+<div class="modal fade" id="addRecordModal" tabindex="-1" aria-labelledby="addRecordModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addRecordModalLabel">Add DNS Record</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="addRecordForm">
+          <div class="mb-3">
+            <label for="domain" class="form-label">Domain</label>
+            <input type="text" class="form-control" id="domain" name="domain" required>
+            <div class="form-text">Enter a fully qualified domain name (e.g., example.com)</div>
+          </div>
+          <div class="mb-3">
+            <label for="type" class="form-label">Record Type</label>
+            <select class="form-select" id="type" name="type" required>
+              <option value="A">A (IPv4 Address)</option>
+              <option value="AAAA">AAAA (IPv6 Address)</option>
+              <option value="CNAME">CNAME (Canonical Name)</option>
+              <option value="MX">MX (Mail Exchange)</option>
+              <option value="TXT">TXT (Text)</option>
+              <option value="NS">NS (Name Server)</option>
+              <option value="SOA">SOA (Start of Authority)</option>
+              <option value="PTR">PTR (Pointer)</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="value" class="form-label">Value</label>
+            <input type="text" class="form-control" id="value" name="value" required>
+            <div class="form-text" id="valueHelp">For A records, enter an IPv4 address (e.g., 192.168.1.1)</div>
+          </div>
+          <div class="mb-3">
+            <label for="ttl" class="form-label">TTL (seconds)</label>
+            <input type="number" class="form-control" id="ttl" name="ttl" value="3600" min="60" max="86400">
+            <div class="form-text">Time to live in seconds (default: 3600)</div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary" id="saveRecordBtn">Save Record</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Edit Record Modal -->
+<div class="modal fade" id="editRecordModal" tabindex="-1" aria-labelledby="editRecordModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editRecordModalLabel">Edit DNS Record</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="editRecordForm">
+          <input type="hidden" id="editRecordId">
+          <div class="mb-3">
+            <label for="editDomain" class="form-label">Domain</label>
+            <input type="text" class="form-control" id="editDomain" disabled>
+          </div>
+          <div class="mb-3">
+            <label for="editType" class="form-label">Record Type</label>
+            <input type="text" class="form-control" id="editType" disabled>
+          </div>
+          <div class="mb-3">
+            <label for="editValue" class="form-label">Value</label>
+            <input type="text" class="form-control" id="editValue" name="value" required>
+          </div>
+          <div class="mb-3">
+            <label for="editTtl" class="form-label">TTL (seconds)</label>
+            <input type="number" class="form-control" id="editTtl" name="ttl" min="60" max="86400">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary" id="updateRecordBtn">Update Record</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div class="modal fade" id="deleteRecordModal" tabindex="-1" aria-labelledby="deleteRecordModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteRecordModalLabel">Confirm Delete</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete this DNS record? This action cannot be undone.</p>
+        <p><strong>Domain:</strong> <span id="deleteDomain"></span></p>
+        <p><strong>Type:</strong> <span id="deleteType"></span></p>
+        <input type="hidden" id="deleteRecordId">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Delete Record</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Load DNS records when the page loads
+    loadDnsRecords();
+    
+    // Update value help text based on selected record type
+    document.getElementById('type').addEventListener('change', updateValueHelp);
+    
+    // Save record button click handler
+    document.getElementById('saveRecordBtn').addEventListener('click', saveRecord);
+    
+    // Update record button click handler
+    document.getElementById('updateRecordBtn').addEventListener('click', updateRecord);
+    
+    // Confirm delete button click handler
+    document.getElementById('confirmDeleteBtn').addEventListener('click', deleteRecord);
+  });
+  
+  function updateValueHelp() {
+    const type = document.getElementById('type').value;
+    const valueHelp = document.getElementById('valueHelp');
+    
+    switch(type) {
+      case 'A':
+        valueHelp.textContent = 'For A records, enter an IPv4 address (e.g., 192.168.1.1)';
+        break;
+      case 'AAAA':
+        valueHelp.textContent = 'For AAAA records, enter an IPv6 address (e.g., 2001:db8::1)';
+        break;
+      case 'CNAME':
+        valueHelp.textContent = 'For CNAME records, enter a domain name (e.g., example.com)';
+        break;
+      case 'MX':
+        valueHelp.textContent = 'For MX records, enter a mail server domain name (e.g., mail.example.com)';
+        break;
+      case 'TXT':
+        valueHelp.textContent = 'For TXT records, enter text value (e.g., v=spf1 include:_spf.example.com ~all)';
+        break;
+      case 'NS':
+        valueHelp.textContent = 'For NS records, enter a nameserver domain name (e.g., ns1.example.com)';
+        break;
+      case 'SOA':
+        valueHelp.textContent = 'For SOA records, enter primary nameserver and admin email (e.g., ns1.example.com admin.example.com)';
+        break;
+      case 'PTR':
+        valueHelp.textContent = 'For PTR records, enter a domain name (e.g., example.com)';
+        break;
+    }
+  }
+  
+  // Load DNS records from API
+  async function loadDnsRecords() {
+    try {
+      const response = await fetch('/api/dns-records');
+      const data = await response.json();
+      
+      if (data.success) {
+        const tableBody = document.querySelector('#dnsRecordsTable tbody');
+        tableBody.innerHTML = '';
+        
+        if (data.data.length === 0) {
+          tableBody.innerHTML = '<tr><td colspan="6" class="text-center">No DNS records found</td></tr>';
+          return;
+        }
+        
+        data.data.forEach(record => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td>${record.domain}</td>
+            <td><span class="badge bg-secondary">${record.type}</span></td>
+            <td>${record.value}</td>
+            <td>${record.ttl}</td>
+            <td>${new Date(record.createdAt).toLocaleString()}</td>
+            <td>
+              <button class="btn btn-sm btn-outline-primary edit-record" data-id="${record._id}">
+                <i class="bi bi-pencil"></i>
+              </button>
+              <button class="btn btn-sm btn-outline-danger delete-record" data-id="${record._id}">
+                <i class="bi bi-trash"></i>
+              </button>
+            </td>
+          `;
+          tableBody.appendChild(row);
+        });
+        
+        // Add event listeners to edit and delete buttons
+        document.querySelectorAll('.edit-record').forEach(btn => {
+          btn.addEventListener('click', () => openEditModal(btn.dataset.id));
+        });
+        
+        document.querySelectorAll('.delete-record').forEach(btn => {
+          btn.addEventListener('click', () => openDeleteModal(btn.dataset.id));
+        });
+      } else {
+        showAlert('danger', 'Failed to load DNS records: ' + data.error);
+      }
+    } catch (error) {
+      showAlert('danger', 'Error loading DNS records: ' + error.message);
+    }
+  }
+  
+  // Save new DNS record
+  async function saveRecord() {
+    const form = document.getElementById('addRecordForm');
+    
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+    
+    const domain = document.getElementById('domain').value;
+    const type = document.getElementById('type').value;
+    const value = document.getElementById('value').value;
+    const ttl = document.getElementById('ttl').value;
+    
+    try {
+      const response = await fetch('/api/dns-records', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ domain, type, value, ttl })
+      });
+      
+      const data = await response.json();
+      
+      if (data.success) {
+        showAlert('success', 'DNS record created successfully');
+        $('#addRecordModal').modal('hide');
+        form.reset();
+        loadDnsRecords();
+      } else {
+        showAlert('danger', 'Failed to create DNS record: ' + data.error);
+      }
+    } catch (error) {
+      showAlert('danger', 'Error creating DNS record: ' + error.message);
+    }
+  }
+  
+  // Open edit modal with record data
+  async function openEditModal(recordId) {
+    try {
+      const response = await fetch(`/api/dns-records/${recordId}`);
+      const data = await response.json();
+      
+      if (data.success) {
+        const record = data.data;
+        
+        document.getElementById('editRecordId').value = record._id;
+        document.getElementById('editDomain').value = record.domain;
+        document.getElementById('editType').value = record.type;
+        document.getElementById('editValue').value = record.value;
+        document.getElementById('editTtl').value = record.ttl;
+        
+        $('#editRecordModal').modal('show');
+      } else {
+        showAlert('danger', 'Failed to load record details: ' + data.error);
+      }
+    } catch (error) {
+      showAlert('danger', 'Error loading record details: ' + error.message);
+    }
+  }
+  
+  // Update DNS record
+  async function updateRecord() {
+    const form = document.getElementById('editRecordForm');
+    
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+    
+    const recordId = document.getElementById('editRecordId').value;
+    const value = document.getElementById('editValue').value;
+    const ttl = document.getElementById('editTtl').value;
+    
+    try {
+      const response = await fetch(`/api/dns-records/${recordId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ value, ttl })
+      });
+      
+      const data = await response.json();
+      
+      if (data.success) {
+        showAlert('success', 'DNS record updated successfully');
+        $('#editRecordModal').modal('hide');
+        loadDnsRecords();
+      } else {
+        showAlert('danger', 'Failed to update DNS record: ' + data.error);
+      }
+    } catch (error) {
+      showAlert('danger', 'Error updating DNS record: ' + error.message);
+    }
+  }
+  
+  // Open delete confirmation modal
+  async function openDeleteModal(recordId) {
+    try {
+      const response = await fetch(`/api/dns-records/${recordId}`);
+      const data = await response.json();
+      
+      if (data.success) {
+        const record = data.data;
+        
+        document.getElementById('deleteRecordId').value = record._id;
+        document.getElementById('deleteDomain').textContent = record.domain;
+        document.getElementById('deleteType').textContent = record.type;
+        
+        $('#deleteRecordModal').modal('show');
+      } else {
+        showAlert('danger', 'Failed to load record details: ' + data.error);
+      }
+    } catch (error) {
+      showAlert('danger', 'Error loading record details: ' + error.message);
+    }
+  }
+  
+  // Delete DNS record
+  async function deleteRecord() {
+    const recordId = document.getElementById('deleteRecordId').value;
+    
+    try {
+      const response = await fetch(`/api/dns-records/${recordId}`, {
+        method: 'DELETE'
+      });
+      
+      const data = await response.json();
+      
+      if (data.success) {
+        showAlert('success', 'DNS record deleted successfully');
+        $('#deleteRecordModal').modal('hide');
+        loadDnsRecords();
+      } else {
+        showAlert('danger', 'Failed to delete DNS record: ' + data.error);
+      }
+    } catch (error) {
+      showAlert('danger', 'Error deleting DNS record: ' + error.message);
+    }
+  }
+  
+  // Show alert message
+  function showAlert(type, message) {
+    const alertDiv = document.createElement('div');
+    alertDiv.className = `alert alert-${type} alert-dismissible fade show`;
+    alertDiv.role = 'alert';
+    alertDiv.innerHTML = `
+      ${message}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    `;
+    
+    document.querySelector('.card-header').after(alertDiv);
+    
+    // Auto-dismiss after 5 seconds
+    setTimeout(() => {
+      alertDiv.classList.remove('show');
+      setTimeout(() => alertDiv.remove(), 150);
+    }, 5000);
+  }
+</script>

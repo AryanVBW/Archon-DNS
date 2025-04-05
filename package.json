@@ -28,6 +28,7 @@
     "ip": "^1.1.8",
     "joi": "^17.9.2",
     "jsonwebtoken": "^9.0.1",
+    "mongodb": "^6.15.0",
     "mongoose": "^7.4.2",
     "morgan": "^1.10.0",
     "winston": "^3.10.0"

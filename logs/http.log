@@ -16,3 +16,457 @@
 2025-04-05 16:54:02 info: DNS server closed
 2025-04-05 16:54:02 info: DNS server listening on port 53
 2025-04-05 16:54:07 warn: MongoDB disconnected
+2025-04-05 23:44:38 info: Starting Archon DNS...
+2025-04-05 23:44:38 info: DNS server closed
+2025-04-05 23:44:38 info: DNS server listening on port 53
+2025-04-05 23:44:39 info: Connected to MongoDB successfully
+2025-04-05 23:44:39 info: Web server listening on port 3000
+2025-04-05 23:44:39 info: DNS server started on port 53
+2025-04-05 23:44:39 info: Archon DNS started successfully
+2025-04-05 23:44:39 info: Web interface available at http://localhost:3000
+2025-04-05 23:44:39 info: DNS server listening on port 53
+2025-04-05 23:44:41 error: Server error: Failed to lookup view "index" in views directory "/Volumes/DATA_vivek/GITHUB/Archon-DNS/src/views"
+2025-04-05 23:44:41 error: Error: Failed to lookup view "index" in views directory "/Volumes/DATA_vivek/GITHUB/Archon-DNS/src/views"
+    at Function.render (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/application.js:597:17)
+    at ServerResponse.render (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/response.js:1049:7)
+    at res.render (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express-ejs-layouts/lib/express-layouts.js:77:18)
+    at /Volumes/DATA_vivek/GITHUB/Archon-DNS/src/routes/web/index.js:53:7
+    at Layer.handle [as handle_request] (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/route.js:149:13)
+    at Route.dispatch (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/route.js:119:3)
+    at Layer.handle [as handle_request] (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/layer.js:95:5)
+    at /Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/index.js:346:12)
+2025-04-05 23:44:41 http: [0mGET / [31m500[0m 10.116 ms - 10565[0m
+2025-04-05 23:44:42 http: [0mGET /api/stats/status [33m404[0m 1.284 ms - 46[0m
+2025-04-05 23:44:42 http: [0mGET /favicon.ico [33m404[0m 5.559 ms - 10459[0m
+2025-04-05 23:44:47 error: Server error: Failed to lookup view "index" in views directory "/Volumes/DATA_vivek/GITHUB/Archon-DNS/src/views"
+2025-04-05 23:44:47 error: Error: Failed to lookup view "index" in views directory "/Volumes/DATA_vivek/GITHUB/Archon-DNS/src/views"
+    at Function.render (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/application.js:597:17)
+    at ServerResponse.render (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/response.js:1049:7)
+    at res.render (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express-ejs-layouts/lib/express-layouts.js:77:18)
+    at /Volumes/DATA_vivek/GITHUB/Archon-DNS/src/routes/web/index.js:53:7
+    at Layer.handle [as handle_request] (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/route.js:149:13)
+    at Route.dispatch (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/route.js:119:3)
+    at Layer.handle [as handle_request] (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/layer.js:95:5)
+    at /Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/index.js:346:12)
+2025-04-05 23:44:47 http: [0mGET / [31m500[0m 7.688 ms - 10565[0m
+2025-04-05 23:44:47 http: [0mGET /api/stats/status [33m404[0m 1.598 ms - 46[0m
+2025-04-05 23:44:52 http: [0mGET /dashboard [36m302[0m 2.449 ms - 35[0m
+2025-04-05 23:44:52 http: [0mGET /login [32m200[0m 4.563 ms - 7116[0m
+2025-04-05 23:44:57 error: Server error: Failed to lookup view "auth/register" in views directory "/Volumes/DATA_vivek/GITHUB/Archon-DNS/src/views"
+2025-04-05 23:44:57 error: Error: Failed to lookup view "auth/register" in views directory "/Volumes/DATA_vivek/GITHUB/Archon-DNS/src/views"
+    at Function.render (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/application.js:597:17)
+    at ServerResponse.render (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/response.js:1049:7)
+    at res.render (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express-ejs-layouts/lib/express-layouts.js:77:18)
+    at /Volumes/DATA_vivek/GITHUB/Archon-DNS/src/routes/web/index.js:75:7
+    at Layer.handle [as handle_request] (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/route.js:149:13)
+    at Route.dispatch (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/route.js:119:3)
+    at Layer.handle [as handle_request] (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/layer.js:95:5)
+    at /Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/index.js:346:12)
+2025-04-05 23:44:57 http: [0mGET /register [31m500[0m 5.994 ms - 10573[0m
+2025-04-05 23:44:57 http: [0mGET /api/stats/status [33m404[0m 1.015 ms - 46[0m
+2025-04-05 23:45:02 http: [0mGET /settings [33m404[0m 4.484 ms - 10459[0m
+2025-04-05 23:45:02 http: [0mGET /api/stats/status [33m404[0m 1.186 ms - 46[0m
+2025-04-05 23:45:05 error: Server error: Failed to lookup view "index" in views directory "/Volumes/DATA_vivek/GITHUB/Archon-DNS/src/views"
+2025-04-05 23:45:05 error: Error: Failed to lookup view "index" in views directory "/Volumes/DATA_vivek/GITHUB/Archon-DNS/src/views"
+    at Function.render (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/application.js:597:17)
+    at ServerResponse.render (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/response.js:1049:7)
+    at res.render (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express-ejs-layouts/lib/express-layouts.js:77:18)
+    at /Volumes/DATA_vivek/GITHUB/Archon-DNS/src/routes/web/index.js:53:7
+    at Layer.handle [as handle_request] (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/route.js:149:13)
+    at Route.dispatch (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/route.js:119:3)
+    at Layer.handle [as handle_request] (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/layer.js:95:5)
+    at /Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/index.js:346:12)
+2025-04-05 23:45:05 http: [0mGET / [31m500[0m 4.631 ms - 10565[0m
+2025-04-05 23:45:05 http: [0mGET /api/stats/status [33m404[0m 0.715 ms - 46[0m
+2025-04-05 23:45:05 error: Server error: Failed to lookup view "index" in views directory "/Volumes/DATA_vivek/GITHUB/Archon-DNS/src/views"
+2025-04-05 23:45:05 error: Error: Failed to lookup view "index" in views directory "/Volumes/DATA_vivek/GITHUB/Archon-DNS/src/views"
+    at Function.render (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/application.js:597:17)
+    at ServerResponse.render (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/response.js:1049:7)
+    at res.render (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express-ejs-layouts/lib/express-layouts.js:77:18)
+    at /Volumes/DATA_vivek/GITHUB/Archon-DNS/src/routes/web/index.js:53:7
+    at Layer.handle [as handle_request] (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/route.js:149:13)
+    at Route.dispatch (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/route.js:119:3)
+    at Layer.handle [as handle_request] (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/layer.js:95:5)
+    at /Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/index.js:346:12)
+2025-04-05 23:45:05 http: [0mGET / [31m500[0m 6.192 ms - 10565[0m
+2025-04-05 23:45:05 http: [0mGET /api/stats/status [33m404[0m 0.903 ms - 46[0m
+2025-04-05 23:45:06 error: Server error: Failed to lookup view "index" in views directory "/Volumes/DATA_vivek/GITHUB/Archon-DNS/src/views"
+2025-04-05 23:45:06 error: Error: Failed to lookup view "index" in views directory "/Volumes/DATA_vivek/GITHUB/Archon-DNS/src/views"
+    at Function.render (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/application.js:597:17)
+    at ServerResponse.render (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/response.js:1049:7)
+    at res.render (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express-ejs-layouts/lib/express-layouts.js:77:18)
+    at /Volumes/DATA_vivek/GITHUB/Archon-DNS/src/routes/web/index.js:53:7
+    at Layer.handle [as handle_request] (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/route.js:149:13)
+    at Route.dispatch (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/route.js:119:3)
+    at Layer.handle [as handle_request] (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/layer.js:95:5)
+    at /Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/index.js:346:12)
+2025-04-05 23:45:06 http: [0mGET / [31m500[0m 5.945 ms - 10565[0m
+2025-04-05 23:45:06 http: [0mGET /api/stats/status [33m404[0m 0.857 ms - 46[0m
+2025-04-05 23:45:11 http: [0mGET /settings [33m404[0m 3.126 ms - 10459[0m
+2025-04-05 23:45:11 http: [0mGET /api/stats/status [33m404[0m 0.986 ms - 46[0m
+2025-04-05 23:45:12 http: [0mGET /logs [36m302[0m 1.686 ms - 35[0m
+2025-04-05 23:45:12 http: [0mGET /login [36m304[0m 4.520 ms - -[0m
+2025-04-05 23:45:15 http: [0mGET /dns [36m302[0m 1.881 ms - 35[0m
+2025-04-05 23:45:15 http: [0mGET /login [36m304[0m 2.786 ms - -[0m
+2025-04-05 23:45:18 http: [0mGET /dashboard [36m302[0m 1.312 ms - 35[0m
+2025-04-05 23:45:18 http: [0mGET /login [36m304[0m 2.163 ms - -[0m
+2025-04-05 23:45:25 http: [0mPOST /api/auth/logout [33m404[0m 0.447 ms - 46[0m
+2025-04-05 23:45:26 http: [0mPOST /api/auth/logout [33m404[0m 0.921 ms - 46[0m
+2025-04-05 23:46:00 http: [0mPOST /api/auth/login [33m401[0m 14.587 ms - 47[0m
+2025-04-05 23:46:02 http: [0mPOST /api/auth/login [33m401[0m 12.749 ms - 47[0m
+2025-04-05 23:46:09 error: Server error: Failed to lookup view "index" in views directory "/Volumes/DATA_vivek/GITHUB/Archon-DNS/src/views"
+2025-04-05 23:46:09 error: Error: Failed to lookup view "index" in views directory "/Volumes/DATA_vivek/GITHUB/Archon-DNS/src/views"
+    at Function.render (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/application.js:597:17)
+    at ServerResponse.render (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/response.js:1049:7)
+    at res.render (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express-ejs-layouts/lib/express-layouts.js:77:18)
+    at /Volumes/DATA_vivek/GITHUB/Archon-DNS/src/routes/web/index.js:53:7
+    at Layer.handle [as handle_request] (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/route.js:149:13)
+    at Route.dispatch (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/route.js:119:3)
+    at Layer.handle [as handle_request] (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/layer.js:95:5)
+    at /Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/index.js:346:12)
+2025-04-05 23:46:09 http: [0mGET / [31m500[0m 5.143 ms - 10565[0m
+2025-04-05 23:46:15 http: [0mGET /admin [33m404[0m 2.705 ms - 10459[0m
+2025-04-05 23:46:15 http: [0mGET /api/stats/status [33m404[0m 1.020 ms - 46[0m
+2025-04-05 23:46:17 error: Server error: Failed to lookup view "index" in views directory "/Volumes/DATA_vivek/GITHUB/Archon-DNS/src/views"
+2025-04-05 23:46:17 error: Error: Failed to lookup view "index" in views directory "/Volumes/DATA_vivek/GITHUB/Archon-DNS/src/views"
+    at Function.render (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/application.js:597:17)
+    at ServerResponse.render (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/response.js:1049:7)
+    at res.render (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express-ejs-layouts/lib/express-layouts.js:77:18)
+    at /Volumes/DATA_vivek/GITHUB/Archon-DNS/src/routes/web/index.js:53:7
+    at Layer.handle [as handle_request] (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/route.js:149:13)
+    at Route.dispatch (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/route.js:119:3)
+    at Layer.handle [as handle_request] (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/layer.js:95:5)
+    at /Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/index.js:346:12)
+2025-04-05 23:46:17 http: [0mGET / [31m500[0m 6.029 ms - 10565[0m
+2025-04-05 23:46:17 http: [0mGET /api/stats/status [33m404[0m 0.569 ms - 46[0m
+2025-04-05 23:46:20 http: [0mGET /settings/profile [33m404[0m 4.066 ms - 10459[0m
+2025-04-05 23:46:20 http: [0mGET /api/stats/status [33m404[0m 0.788 ms - 46[0m
+2025-04-05 23:46:23 http: [0mGET /settings [33m404[0m 3.035 ms - 10459[0m
+2025-04-05 23:46:23 http: [0mGET /api/stats/status [33m404[0m 0.904 ms - 46[0m
+2025-04-05 23:46:24 http: [0mPOST /api/auth/logout [33m404[0m 1.135 ms - 46[0m
+2025-04-05 23:46:26 http: [0mPOST /api/auth/logout [33m404[0m 0.825 ms - 46[0m
+2025-04-05 23:46:27 http: [0mGET /blocking [36m302[0m 1.267 ms - 35[0m
+2025-04-05 23:46:27 http: [0mGET /login [36m304[0m 2.161 ms - -[0m
+2025-04-05 23:46:31 error: Server error: Failed to lookup view "auth/register" in views directory "/Volumes/DATA_vivek/GITHUB/Archon-DNS/src/views"
+2025-04-05 23:46:31 error: Error: Failed to lookup view "auth/register" in views directory "/Volumes/DATA_vivek/GITHUB/Archon-DNS/src/views"
+    at Function.render (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/application.js:597:17)
+    at ServerResponse.render (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/response.js:1049:7)
+    at res.render (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express-ejs-layouts/lib/express-layouts.js:77:18)
+    at /Volumes/DATA_vivek/GITHUB/Archon-DNS/src/routes/web/index.js:75:7
+    at Layer.handle [as handle_request] (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/route.js:149:13)
+    at Route.dispatch (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/route.js:119:3)
+    at Layer.handle [as handle_request] (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/layer.js:95:5)
+    at /Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/index.js:346:12)
+2025-04-05 23:46:31 http: [0mGET /register [31m500[0m 5.250 ms - 10573[0m
+2025-04-05 23:46:31 http: [0mGET /api/stats/status [33m404[0m 1.142 ms - 46[0m
+2025-04-05 23:46:47 info: Shutting down Archon DNS...
+2025-04-05 23:46:47 info: DNS server stopped
+2025-04-05 23:46:51 info: Starting Archon DNS...
+2025-04-05 23:46:51 info: DNS server closed
+2025-04-05 23:46:51 info: DNS server listening on port 53
+2025-04-05 23:46:51 info: Connected to MongoDB successfully
+2025-04-05 23:46:52 info: Web server listening on port 3000
+2025-04-05 23:46:52 info: DNS server started on port 53
+2025-04-05 23:46:52 info: Archon DNS started successfully
+2025-04-05 23:46:52 info: Web interface available at http://localhost:3000
+2025-04-05 23:46:52 info: DNS server listening on port 53
+2025-04-05 23:46:56 http: [0mGET /login [36m304[0m 3.613 ms - -[0m
+2025-04-05 23:46:57 http: [0mGET /login [36m304[0m 2.309 ms - -[0m
+2025-04-05 23:47:00 http: [0mGET /login [36m304[0m 3.767 ms - -[0m
+2025-04-05 23:47:01 http: [0mGET /login [36m304[0m 2.562 ms - -[0m
+2025-04-05 23:47:06 info: Web server stopped
+2025-04-05 23:47:06 warn: MongoDB disconnected
+2025-04-05 23:47:17 http: [0mPOST /api/auth/login [33m401[0m 32.910 ms - 47[0m
+2025-04-05 23:47:30 http: [0mPOST /api/auth/login [33m401[0m 40.639 ms - 47[0m
+2025-04-05 23:47:39 http: [0mGET /admin-dashboard [33m404[0m 10.804 ms - 10459[0m
+2025-04-05 23:47:39 http: [0mGET /api/stats/status [33m404[0m 1.307 ms - 46[0m
+2025-04-05 23:47:46 http: [0mGET /admin-dashboard [33m404[0m 4.489 ms - 10459[0m
+2025-04-05 23:47:46 http: [0mGET /api/stats/status [33m404[0m 1.130 ms - 46[0m
+2025-04-05 23:47:46 http: [0mGET /admin-dashboard [33m404[0m 3.445 ms - 10459[0m
+2025-04-05 23:47:46 http: [0mGET /api/stats/status [33m404[0m 0.558 ms - 46[0m
+2025-04-05 23:47:51 http: [0mGET /dashboard [36m302[0m 2.673 ms - 35[0m
+2025-04-05 23:47:51 http: [0mGET /login [36m304[0m 2.972 ms - -[0m
+2025-04-05 23:47:56 error: Server error: Failed to lookup view "index" in views directory "/Volumes/DATA_vivek/GITHUB/Archon-DNS/src/views"
+2025-04-05 23:47:56 error: Error: Failed to lookup view "index" in views directory "/Volumes/DATA_vivek/GITHUB/Archon-DNS/src/views"
+    at Function.render (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/application.js:597:17)
+    at ServerResponse.render (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/response.js:1049:7)
+    at res.render (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express-ejs-layouts/lib/express-layouts.js:77:18)
+    at /Volumes/DATA_vivek/GITHUB/Archon-DNS/src/routes/web/index.js:53:7
+    at Layer.handle [as handle_request] (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/route.js:149:13)
+    at Route.dispatch (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/route.js:119:3)
+    at Layer.handle [as handle_request] (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/layer.js:95:5)
+    at /Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/index.js:346:12)
+2025-04-05 23:47:56 http: [0mGET / [31m500[0m 7.594 ms - 10565[0m
+2025-04-05 23:47:56 http: [0mGET /api/stats/status [33m404[0m 0.655 ms - 46[0m
+2025-04-05 23:48:27 http: [0mGET /api/stats/status [33m404[0m 1.473 ms - 46[0m
+2025-04-05 23:48:57 http: [0mGET /api/stats/status [33m404[0m 1.181 ms - 46[0m
+2025-04-05 23:49:04 http: [0mGET /dashboard [36m302[0m 1.532 ms - 35[0m
+2025-04-05 23:49:04 http: [0mGET /login [36m304[0m 2.960 ms - -[0m
+2025-04-05 23:49:06 http: [0mGET /dns [36m302[0m 1.456 ms - 35[0m
+2025-04-05 23:49:06 http: [0mGET /login [36m304[0m 2.252 ms - -[0m
+2025-04-05 23:49:13 error: Server error: Failed to lookup view "auth/register" in views directory "/Volumes/DATA_vivek/GITHUB/Archon-DNS/src/views"
+2025-04-05 23:49:13 error: Error: Failed to lookup view "auth/register" in views directory "/Volumes/DATA_vivek/GITHUB/Archon-DNS/src/views"
+    at Function.render (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/application.js:597:17)
+    at ServerResponse.render (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/response.js:1049:7)
+    at res.render (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express-ejs-layouts/lib/express-layouts.js:77:18)
+    at /Volumes/DATA_vivek/GITHUB/Archon-DNS/src/routes/web/index.js:75:7
+    at Layer.handle [as handle_request] (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/route.js:149:13)
+    at Route.dispatch (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/route.js:119:3)
+    at Layer.handle [as handle_request] (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/layer.js:95:5)
+    at /Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/index.js:346:12)
+2025-04-05 23:49:13 http: [0mGET /register [31m500[0m 5.986 ms - 10573[0m
+2025-04-05 23:49:13 http: [0mGET /api/stats/status [33m404[0m 0.779 ms - 46[0m
+2025-04-05 23:49:28 error: Server error: Failed to lookup view "auth/register" in views directory "/Volumes/DATA_vivek/GITHUB/Archon-DNS/src/views"
+2025-04-05 23:49:28 error: Error: Failed to lookup view "auth/register" in views directory "/Volumes/DATA_vivek/GITHUB/Archon-DNS/src/views"
+    at Function.render (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/application.js:597:17)
+    at ServerResponse.render (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/response.js:1049:7)
+    at res.render (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express-ejs-layouts/lib/express-layouts.js:77:18)
+    at /Volumes/DATA_vivek/GITHUB/Archon-DNS/src/routes/web/index.js:75:7
+    at Layer.handle [as handle_request] (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/route.js:149:13)
+    at Route.dispatch (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/route.js:119:3)
+    at Layer.handle [as handle_request] (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/layer.js:95:5)
+    at /Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/index.js:346:12)
+2025-04-05 23:49:28 http: [0mGET /register [31m500[0m 5.308 ms - 10573[0m
+2025-04-05 23:49:28 http: [0mGET /api/stats/status [33m404[0m 0.875 ms - 46[0m
+2025-04-05 23:49:30 http: [0mGET /dns [36m302[0m 1.349 ms - 35[0m
+2025-04-05 23:49:30 http: [0mGET /login [36m304[0m 2.879 ms - -[0m
+2025-04-05 23:49:33 http: [0mGET /dashboard [36m302[0m 1.313 ms - 35[0m
+2025-04-05 23:49:33 http: [0mGET /login [36m304[0m 2.360 ms - -[0m
+2025-04-05 23:49:35 http: [0mGET /blocking [36m302[0m 1.183 ms - 35[0m
+2025-04-05 23:49:35 http: [0mGET /login [36m304[0m 2.437 ms - -[0m
+2025-04-05 23:49:38 http: [0mGET /logs [36m302[0m 2.376 ms - 35[0m
+2025-04-05 23:49:38 http: [0mGET /login [36m304[0m 1.787 ms - -[0m
+2025-04-05 23:50:11 http: [0mGET /api/stats/status [33m404[0m 0.256 ms - 46[0m
+2025-04-05 23:50:39 http: [0mGET /settings [33m404[0m 4.057 ms - 10459[0m
+2025-04-05 23:50:39 http: [0mGET /api/stats/status [33m404[0m 1.753 ms - 46[0m
+2025-04-05 23:50:39 http: [0mGET /logs [36m302[0m 1.261 ms - 35[0m
+2025-04-05 23:50:39 http: [0mGET /login [36m304[0m 2.557 ms - -[0m
+2025-04-05 23:50:43 http: [0mGET /login [36m304[0m 2.829 ms - -[0m
+2025-04-05 23:50:43 http: [0mGET /login [36m304[0m 2.570 ms - -[0m
+2025-04-05 23:50:43 http: [0mGET /login [36m304[0m 1.792 ms - -[0m
+2025-04-05 23:51:05 http: [0mPOST /api/auth/login [33m401[0m 16.467 ms - 47[0m
+2025-04-05 23:52:56 http: [0mGET /login [36m304[0m 4.120 ms - -[0m
+2025-04-05 23:52:59 http: [0mGET /forgot-password [33m404[0m 3.084 ms - 10459[0m
+2025-04-05 23:52:59 http: [0mGET /api/stats/status [33m404[0m 0.590 ms - 46[0m
+2025-04-05 23:53:03 http: [0mGET /settings/profile [33m404[0m 3.717 ms - 10459[0m
+2025-04-05 23:53:04 http: [0mGET /api/stats/status [33m404[0m 0.483 ms - 46[0m
+2025-04-05 23:53:09 http: [0mPOST /api/auth/logout [33m404[0m 1.173 ms - 46[0m
+2025-04-05 23:53:11 http: [0mGET /settings [33m404[0m 2.924 ms - 10459[0m
+2025-04-05 23:53:11 http: [0mGET /api/stats/status [33m404[0m 0.526 ms - 46[0m
+2025-04-05 23:53:12 http: [0mGET /logs [36m302[0m 1.321 ms - 35[0m
+2025-04-05 23:53:12 http: [0mGET /login [36m304[0m 2.297 ms - -[0m
+2025-04-05 23:58:39 http: [0mGET /login [36m304[0m 2.539 ms - -[0m
+2025-04-05 23:58:44 http: [0mGET /settings [33m404[0m 2.990 ms - 10459[0m
+2025-04-05 23:58:44 http: [0mGET /api/stats/status [33m404[0m 1.151 ms - 46[0m
+2025-04-05 23:58:45 http: [0mGET /dashboard [36m302[0m 1.326 ms - 35[0m
+2025-04-05 23:58:45 http: [0mGET /login [36m304[0m 2.262 ms - -[0m
+2025-04-05 23:58:49 http: [0mPOST /api/auth/logout [33m404[0m 0.806 ms - 46[0m
+2025-04-05 23:58:53 http: [0mGET /settings [33m404[0m 3.979 ms - 10459[0m
+2025-04-05 23:58:53 http: [0mGET /api/stats/status [33m404[0m 1.116 ms - 46[0m
+2025-04-05 23:58:54 http: [0mGET /forgot-password [33m404[0m 2.719 ms - 10459[0m
+2025-04-05 23:58:54 http: [0mGET /api/stats/status [33m404[0m 0.917 ms - 46[0m
+2025-04-05 23:59:24 http: [0mGET /api/stats/status [33m404[0m 0.902 ms - 46[0m
+2025-04-05 23:59:26 http: [0mGET / [32m200[0m 3.090 ms - 6528[0m
+2025-04-05 23:59:26 http: [0mGET /img/dns-illustration.svg [33m404[0m 3.232 ms - 10459[0m
+2025-04-05 23:59:32 http: [0mGET / [36m304[0m 2.659 ms - -[0m
+2025-04-05 23:59:32 http: [0mGET /img/dns-illustration.svg [33m404[0m 3.654 ms - 10459[0m
+2025-04-05 23:59:41 http: [0mGET /login [36m304[0m 1.750 ms - -[0m
+2025-04-05 23:59:44 http: [0mGET /register [32m200[0m 3.096 ms - 5822[0m
+2025-04-06 00:02:54 http: [0mGET /login [36m304[0m 2.817 ms - -[0m
+2025-04-06 00:02:56 http: [0mGET / [36m304[0m 2.694 ms - -[0m
+2025-04-06 00:02:56 http: [0mGET /img/dns-illustration.svg [33m404[0m 2.527 ms - 10459[0m
+2025-04-06 00:03:01 http: [0mGET /login [36m304[0m 3.883 ms - -[0m
+2025-04-06 00:03:22 http: [0mPOST /api/auth/login [33m401[0m 16.869 ms - 47[0m
+2025-04-06 00:03:23 http: [0mPOST /api/auth/login [33m401[0m 13.084 ms - 47[0m
+2025-04-06 00:03:51 http: [0mGET /auth/login [33m404[0m 3.309 ms - 10459[0m
+2025-04-06 00:03:51 http: [0mGET /api/stats/status [33m404[0m 0.764 ms - 46[0m
+2025-04-06 00:03:53 http: [0mGET /blocking [36m302[0m 1.921 ms - 35[0m
+2025-04-06 00:03:53 http: [0mGET /login [36m304[0m 3.430 ms - -[0m
+2025-04-06 00:03:56 http: [0mGET /register [36m304[0m 3.007 ms - -[0m
+2025-04-06 00:04:33 http: [0mPOST /register [33m404[0m 2.933 ms - 10459[0m
+2025-04-06 00:04:33 http: [0mGET /api/stats/status [33m404[0m 0.869 ms - 46[0m
+2025-04-06 00:04:39 http: [0mGET /dashboard [36m302[0m 1.309 ms - 35[0m
+2025-04-06 00:04:39 http: [0mGET /login [36m304[0m 3.347 ms - -[0m
+2025-04-06 00:04:53 http: [0mPOST /api/auth/login [33m401[0m 17.008 ms - 47[0m
+2025-04-06 00:04:55 http: [0mPOST /api/auth/login [33m401[0m 17.660 ms - 47[0m
+2025-04-06 00:04:56 http: [0mPOST /api/auth/login [33m401[0m 23.727 ms - 47[0m
+2025-04-06 00:04:56 http: [0mGET /forgot-password [33m404[0m 2.955 ms - 10459[0m
+2025-04-06 00:04:56 http: [0mGET /api/stats/status [33m404[0m 0.891 ms - 46[0m
+2025-04-06 00:05:20 http: [0mGET /dashboard [36m302[0m 5.388 ms - 35[0m
+2025-04-06 00:05:20 http: [0mGET /login [36m304[0m 3.556 ms - -[0m
+2025-04-06 00:05:38 info: Starting Archon DNS...
+2025-04-06 00:05:38 info: DNS server closed
+2025-04-06 00:05:38 info: DNS server listening on port 53
+2025-04-06 00:05:38 info: Connected to MongoDB successfully
+2025-04-06 00:05:38 info: Web server listening on port 3000
+2025-04-06 00:05:38 info: DNS server started on port 53
+2025-04-06 00:05:38 info: Archon DNS started successfully
+2025-04-06 00:05:38 info: Web interface available at http://localhost:3000
+2025-04-06 00:05:38 info: DNS server listening on port 53
+2025-04-06 00:06:12 http: [0mGET /login [36m304[0m 33.457 ms - -[0m
+2025-04-06 00:06:22 error: Login error: "expiresIn" should be a number of seconds or string representing a timespan
+2025-04-06 00:06:22 http: [0mPOST /api/auth/login [31m500[0m 199.090 ms - 40[0m
+2025-04-06 00:06:46 error: Login error: "expiresIn" should be a number of seconds or string representing a timespan
+2025-04-06 00:06:46 http: [0mPOST /api/auth/login [31m500[0m 87.304 ms - 40[0m
+2025-04-06 00:06:47 error: Login error: "expiresIn" should be a number of seconds or string representing a timespan
+2025-04-06 00:06:47 http: [0mPOST /api/auth/login [31m500[0m 175.915 ms - 40[0m
+2025-04-06 00:06:49 error: Login error: "expiresIn" should be a number of seconds or string representing a timespan
+2025-04-06 00:06:49 http: [0mPOST /api/auth/login [31m500[0m 476.578 ms - 40[0m
+2025-04-06 00:06:49 error: Login error: "expiresIn" should be a number of seconds or string representing a timespan
+2025-04-06 00:06:49 http: [0mPOST /api/auth/login [31m500[0m 282.073 ms - 40[0m
+2025-04-06 00:06:49 error: Login error: "expiresIn" should be a number of seconds or string representing a timespan
+2025-04-06 00:06:49 http: [0mPOST /api/auth/login [31m500[0m 229.303 ms - 40[0m
+2025-04-06 00:07:06 info: Starting Archon DNS...
+2025-04-06 00:07:06 info: DNS server closed
+2025-04-06 00:07:06 info: DNS server listening on port 53
+2025-04-06 00:07:06 info: Connected to MongoDB successfully
+2025-04-06 00:07:06 info: Web server listening on port 3000
+2025-04-06 00:07:06 info: DNS server started on port 53
+2025-04-06 00:07:06 info: Archon DNS started successfully
+2025-04-06 00:07:06 info: Web interface available at http://localhost:3000
+2025-04-06 00:07:06 info: DNS server listening on port 53
+2025-04-06 00:07:45 info: Starting Archon DNS...
+2025-04-06 00:07:45 info: DNS server closed
+2025-04-06 00:07:45 info: DNS server listening on port 53
+2025-04-06 00:07:45 info: Connected to MongoDB successfully
+2025-04-06 00:07:45 info: Web server listening on port 3000
+2025-04-06 00:07:45 info: DNS server started on port 53
+2025-04-06 00:07:45 info: Archon DNS started successfully
+2025-04-06 00:07:45 info: Web interface available at http://localhost:3000
+2025-04-06 00:07:45 info: DNS server listening on port 53
+2025-04-06 00:07:58 error: Login error: "expiresIn" should be a number of seconds or string representing a timespan
+2025-04-06 00:07:58 http: [0mPOST /api/auth/login [31m500[0m 336.659 ms - 40[0m
+2025-04-06 00:08:39 info: Starting Archon DNS...
+2025-04-06 00:08:39 info: DNS server closed
+2025-04-06 00:08:39 info: DNS server listening on port 53
+2025-04-06 00:08:40 info: Connected to MongoDB successfully
+2025-04-06 00:08:40 info: Web server listening on port 3000
+2025-04-06 00:08:40 info: DNS server started on port 53
+2025-04-06 00:08:40 info: Archon DNS started successfully
+2025-04-06 00:08:40 info: Web interface available at http://localhost:3000
+2025-04-06 00:08:40 info: DNS server listening on port 53
+2025-04-06 00:09:22 error: Login error: "expiresIn" should be a number of seconds or string representing a timespan
+2025-04-06 00:09:22 http: [0mPOST /api/auth/login [31m500[0m 228.211 ms - 40[0m
+2025-04-06 00:09:26 error: Login error: "expiresIn" should be a number of seconds or string representing a timespan
+2025-04-06 00:09:26 http: [0mPOST /api/auth/login [31m500[0m 211.066 ms - 40[0m
+2025-04-06 00:09:47 error: Login error: "expiresIn" should be a number of seconds or string representing a timespan
+2025-04-06 00:09:47 http: [0mPOST /api/auth/login [31m500[0m 114.934 ms - 40[0m
+2025-04-06 00:11:26 info: Starting Archon DNS...
+2025-04-06 00:11:26 info: DNS server closed
+2025-04-06 00:11:26 info: DNS server listening on port 53
+2025-04-06 00:11:27 info: Connected to MongoDB successfully
+2025-04-06 00:11:27 info: Web server listening on port 3000
+2025-04-06 00:11:27 info: DNS server started on port 53
+2025-04-06 00:11:27 info: Archon DNS started successfully
+2025-04-06 00:11:27 info: Web interface available at http://localhost:3000
+2025-04-06 00:11:27 info: DNS server listening on port 53
+2025-04-06 00:11:39 info: Starting Archon DNS...
+2025-04-06 00:11:39 info: DNS server closed
+2025-04-06 00:11:39 info: DNS server listening on port 53
+2025-04-06 00:11:40 info: Connected to MongoDB successfully
+2025-04-06 00:11:40 error: Failed to start web server: listen EADDRINUSE: address already in use :::3000
+2025-04-06 00:11:40 error: Uncaught Exception: listen EADDRINUSE: address already in use :::3000
+2025-04-06 00:11:40 error: Error: listen EADDRINUSE: address already in use :::3000
+    at Server.setupListenHandle [as _listen2] (node:net:1817:16)
+    at listenInCluster (node:net:1865:12)
+    at Server.listen (node:net:1953:7)
+    at Function.listen (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/application.js:635:24)
+    at /Volumes/DATA_vivek/GITHUB/Archon-DNS/src/web-server.js:198:32
+    at new Promise (<anonymous>)
+    at WebServer.start (/Volumes/DATA_vivek/GITHUB/Archon-DNS/src/web-server.js:197:14)
+    at start (/Volumes/DATA_vivek/GITHUB/Archon-DNS/src/index.js:80:38)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-04-06 00:11:40 info: Shutting down Archon DNS...
+2025-04-06 00:11:40 info: DNS server stopped
+2025-04-06 00:11:40 warn: MongoDB disconnected
+2025-04-06 00:11:59 info: Starting Archon DNS...
+2025-04-06 00:11:59 info: DNS server closed
+2025-04-06 00:11:59 info: DNS server listening on port 53
+2025-04-06 00:11:59 info: Connected to MongoDB successfully
+2025-04-06 00:11:59 info: Web server listening on port 3000
+2025-04-06 00:11:59 info: DNS server started on port 53
+2025-04-06 00:11:59 info: Archon DNS started successfully
+2025-04-06 00:11:59 info: Web interface available at http://localhost:3000
+2025-04-06 00:11:59 info: DNS server listening on port 53
+2025-04-06 00:12:03 http: [0mGET /login [32m200[0m 15.183 ms - 7147[0m
+2025-04-06 00:12:21 error: Login error: "expiresIn" should be a number of seconds or string representing a timespan
+2025-04-06 00:12:21 http: [0mPOST /api/auth/login [31m500[0m 183.140 ms - 40[0m
+2025-04-06 00:12:46 error: Login error: "expiresIn" should be a number of seconds or string representing a timespan
+2025-04-06 00:12:46 http: [0mPOST /api/auth/login [31m500[0m 208.633 ms - 40[0m
+2025-04-06 00:13:39 info: Starting Archon DNS...
+2025-04-06 00:13:39 info: DNS server closed
+2025-04-06 00:13:40 info: DNS server listening on port 53
+2025-04-06 00:13:40 info: Connected to MongoDB successfully
+2025-04-06 00:13:40 info: Web server listening on port 3000
+2025-04-06 00:13:40 info: DNS server started on port 53
+2025-04-06 00:13:40 info: Archon DNS started successfully
+2025-04-06 00:13:40 info: Web interface available at http://localhost:3000
+2025-04-06 00:13:40 info: DNS server listening on port 53
+2025-04-06 00:13:49 info: Starting Archon DNS...
+2025-04-06 00:13:49 info: DNS server closed
+2025-04-06 00:13:49 info: DNS server listening on port 53
+2025-04-06 00:13:50 info: Connected to MongoDB successfully
+2025-04-06 00:13:50 info: Web server listening on port 3000
+2025-04-06 00:13:50 info: DNS server started on port 53
+2025-04-06 00:13:50 info: Archon DNS started successfully
+2025-04-06 00:13:50 info: Web interface available at http://localhost:3000
+2025-04-06 00:13:50 info: DNS server listening on port 53
+2025-04-06 00:14:11 http: [0mPOST /api/auth/login [32m200[0m 198.098 ms - 327[0m
+2025-04-06 00:14:11 http: [0mGET /dashboard [32m200[0m 252.691 ms - 28572[0m
+2025-04-06 00:14:12 http: [0mGET /api/stats/dashboard [33m401[0m 38.874 ms - 58[0m
+2025-04-06 00:14:12 http: [0mGET /api/stats/status [33m404[0m 149.718 ms - 46[0m
+2025-04-06 00:14:19 http: [0mPOST /api/stats/restart-dns [33m404[0m 62.116 ms - 46[0m
+2025-04-06 00:14:25 http: [0mGET /dashboard [36m304[0m 477.237 ms - -[0m
+2025-04-06 00:14:25 http: [0mGET /api/stats/dashboard [33m401[0m 15.696 ms - 58[0m
+2025-04-06 00:14:25 http: [0mGET /api/stats/status [33m404[0m 55.924 ms - 46[0m
+2025-04-06 00:14:26 http: [0mGET /dns [0m-[0m - ms - -[0m
+2025-04-06 00:14:27 http: [0mGET /dashboard [0m-[0m - ms - -[0m
+2025-04-06 00:14:27 http: [0mGET /blocking [32m200[0m 171.701 ms - 26810[0m
+2025-04-06 00:14:27 http: [0mGET /api/block-rules [33m401[0m 5.548 ms - 58[0m
+2025-04-06 00:14:27 http: [0mGET /api/stats/status [33m404[0m 63.781 ms - 46[0m
+2025-04-06 00:14:28 http: [0mGET /dns [32m200[0m 361.667 ms - 24331[0m
+2025-04-06 00:14:28 http: [0mGET /api/dns-records [33m401[0m 21.627 ms - 58[0m
+2025-04-06 00:14:29 http: [0mGET /api/stats/status [33m404[0m 244.773 ms - 46[0m
+2025-04-06 00:14:29 http: [0mGET /dashboard [32m200[0m 230.786 ms - 28572[0m
+2025-04-06 00:14:29 http: [0mGET /api/stats/dashboard [33m401[0m 4.571 ms - 58[0m
+2025-04-06 00:14:29 http: [0mGET /api/stats/status [33m404[0m 64.139 ms - 46[0m
+2025-04-06 00:14:30 http: [0mGET /blocking [36m304[0m 312.632 ms - -[0m
+2025-04-06 00:14:30 http: [0mGET /api/block-rules [33m401[0m 3.150 ms - 58[0m
+2025-04-06 00:14:30 http: [0mGET /api/stats/status [33m404[0m 488.630 ms - 46[0m
+2025-04-06 00:14:31 http: [0mGET /logs [32m200[0m 534.007 ms - 33582[0m
+2025-04-06 00:14:31 http: [0mGET /api/query-logs?page=1&limit=25 [33m401[0m 7.541 ms - 58[0m
+2025-04-06 00:14:31 http: [0mGET /api/stats/dns [33m404[0m 46.668 ms - 46[0m
+2025-04-06 00:14:31 http: [0mGET /api/stats/status [33m404[0m 220.685 ms - 46[0m
+2025-04-06 00:14:38 http: [0mGET /dashboard [36m304[0m 1295.650 ms - -[0m
+2025-04-06 00:14:38 http: [0mGET /api/stats/dashboard [33m401[0m 8.917 ms - 58[0m
+2025-04-06 00:14:38 http: [0mGET /api/stats/status [33m404[0m 52.091 ms - 46[0m
+2025-04-06 00:14:40 http: [0mGET /dashboard [36m304[0m 161.275 ms - -[0m
+2025-04-06 00:14:40 http: [0mGET /api/stats/dashboard [33m401[0m 1.853 ms - 58[0m
+2025-04-06 00:14:40 http: [0mGET /api/stats/status [33m404[0m 20.538 ms - 46[0m
+2025-04-06 00:14:59 info: Shutting down Archon DNS...
+2025-04-06 00:14:59 info: DNS server stopped
+2025-04-06 00:14:59 info: Web server stopped

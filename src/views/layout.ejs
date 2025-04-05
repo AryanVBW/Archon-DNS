@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%- title %> | Archon DNS</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <style>
+    :root {
+      --sidebar-width: 260px;
+      --header-height: 60px;
+      --primary-color: #3b7ddd;
+      --primary-dark: #2f64b1;
+      --secondary-color: #6c757d;
+      --success-color: #28a745;
+      --info-color: #17a2b8;
+      --warning-color: #ffc107;
+      --danger-color: #dc3545;
+      --light-color: #f8f9fa;
+      --dark-color: #343a40;
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f5f7fb;
+      color: #495057;
+    }
+    
+    .wrapper {
+      display: flex;
+      width: 100%;
+      align-items: stretch;
+    }
+    
+    .sidebar {
+      width: var(--sidebar-width);
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      z-index: 999;
+      background: #233044;
+      color: #fff;
+      transition: all 0.3s;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    .sidebar.collapsed {
+      margin-left: calc(-1 * var(--sidebar-width));
+    }
+    
+    .sidebar-header {
+      padding: 15px;
+      background: #192235;
+      height: var(--header-height);
+      display: flex;
+      align-items: center;
+    }
+    
+    .sidebar-header h3 {
+      margin: 0;
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+    
+    .sidebar-content {
+      padding: 15px 0;
+      height: calc(100vh - var(--header-height));
+      overflow-y: auto;
+    }
+    
+    .sidebar-nav {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .sidebar-nav .sidebar-item {
+      margin-bottom: 5px;
+    }
+    
+    .sidebar-nav .sidebar-link {
+      padding: 10px 15px;
+      display: flex;
+      align-items: center;
+      color: rgba(255, 255, 255, 0.7);
+      text-decoration: none;
+      transition: all 0.3s;
+      border-left: 3px solid transparent;
+    }
+    
+    .sidebar-nav .sidebar-link:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.1);
+    }
+    
+    .sidebar-nav .sidebar-link.active {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.1);
+      border-left-color: var(--primary-color);
+    }
+    
+    .sidebar-nav .sidebar-link i {
+      margin-right: 10px;
+      font-size: 1.1rem;
+      width: 20px;
+      text-align: center;
+    }
+    
+    .sidebar-footer {
+      padding: 15px;
+      background: #192235;
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+    }
+    
+    .content {
+      width: calc(100% - var(--sidebar-width));
+      min-height: 100vh;
+      margin-left: var(--sidebar-width);
+      transition: all 0.3s;
+    }
+    
+    .content.expanded {
+      width: 100%;
+      margin-left: 0;
+    }
+    
+    .navbar {
+      height: var(--header-height);
+      background: #fff;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    .main-content {
+      padding: 20px;
+    }
+    
+    .card {
+      border: none;
+      border-radius: 0.5rem;
+      box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+      margin-bottom: 1.5rem;
+    }
+    
+    .card-header {
+      background-color: #fff;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+      padding: 1rem 1.25rem;
+    }
+    
+    .stat-card {
+      transition: transform 0.3s;
+    }
+    
+    .stat-card:hover {
+      transform: translateY(-5px);
+    }
+    
+    .stat-value {
+      font-size: 2rem;
+      font-weight: 600;
+      margin-bottom: 0;
+    }
+    
+    @media (max-width: 768px) {
+      .sidebar {
+        margin-left: calc(-1 * var(--sidebar-width));
+      }
+      
+      .sidebar.active {
+        margin-left: 0;
+      }
+      
+      .content {
+        width: 100%;
+        margin-left: 0;
+      }
+      
+      .sidebar-toggle {
+        display: block;
+      }
+    }
+    
+    .dropdown-menu {
+      box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+      border: none;
+    }
+    
+    .dropdown-item {
+      padding: 0.5rem 1.5rem;
+    }
+    
+    .dropdown-item:active {
+      background-color: var(--primary-color);
+    }
+    
+    .btn-primary {
+      background-color: var(--primary-color);
+      border-color: var(--primary-color);
+    }
+    
+    .btn-primary:hover {
+      background-color: var(--primary-dark);
+      border-color: var(--primary-dark);
+    }
+    
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      background: #c1c1c1;
+      border-radius: 3px;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+      background: #a8a8a8;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <!-- Sidebar -->
+    <nav id="sidebar" class="sidebar">
+      <div class="sidebar-header">
+        <h3><i class="bi bi-hdd-network me-2"></i>Archon DNS</h3>
+      </div>
+      
+      <div class="sidebar-content">
+        <ul class="sidebar-nav">
+          <li class="sidebar-item">
+            <a href="/" class="sidebar-link <%= path === '/' ? 'active' : '' %>">
+              <i class="bi bi-speedometer2"></i>
+              Dashboard
+            </a>
+          </li>
+          <li class="sidebar-item">
+            <a href="/dns" class="sidebar-link <%= path === '/dns' ? 'active' : '' %>">
+              <i class="bi bi-diagram-3"></i>
+              DNS Records
+            </a>
+          </li>
+          <li class="sidebar-item">
+            <a href="/blocking" class="sidebar-link <%= path === '/blocking' ? 'active' : '' %>">
+              <i class="bi bi-shield-fill-check"></i>
+              Domain Blocking
+            </a>
+          </li>
+          <li class="sidebar-item">
+            <a href="/logs" class="sidebar-link <%= path === '/logs' ? 'active' : '' %>">
+              <i class="bi bi-list-ul"></i>
+              Query Logs
+            </a>
+          </li>
+          <li class="sidebar-item">
+            <a href="/settings" class="sidebar-link <%= path === '/settings' ? 'active' : '' %>">
+              <i class="bi bi-gear"></i>
+              Settings
+            </a>
+          </li>
+        </ul>
+        
+        <hr class="sidebar-divider">
+        
+        <div class="px-3 mb-3">
+          <small class="text-uppercase fw-bold text-muted">System Status</small>
+        </div>
+        
+        <div class="px-3 mb-2">
+          <div class="d-flex justify-content-between mb-1">
+            <small>DNS Server</small>
+            <small id="sidebar-dns-status">
+              <span class="badge bg-success">Running</span>
+            </small>
+          </div>
+          <div class="d-flex justify-content-between mb-1">
+            <small>Queries Today</small>
+            <small id="sidebar-queries">0</small>
+          </div>
+          <div class="d-flex justify-content-between">
+            <small>Blocked Today</small>
+            <small id="sidebar-blocked">0</small>
+          </div>
+        </div>
+      </div>
+      
+      <div class="sidebar-footer">
+        <div class="dropdown">
+          <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="bi bi-person-circle me-2"></i>
+            <span><%= user ? user.name : 'Admin' %></span>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="userDropdown">
+            <li><a class="dropdown-item" href="/profile">Profile</a></li>
+            <li><a class="dropdown-item" href="/settings">Settings</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="/auth/logout">Sign out</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    
+    <!-- Page Content -->
+    <div class="content" id="content">
+      <nav class="navbar navbar-expand navbar-light">
+        <div class="container-fluid">
+          <button type="button" id="sidebarToggle" class="btn btn-link text-dark">
+            <i class="bi bi-list fs-4"></i>
+          </button>
+          
+          <div class="ms-auto d-flex align-items-center">
+            <div class="dropdown me-3">
+              <a class="nav-link dropdown-toggle" href="#" id="notificationsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-bell fs-5"></i>
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="notification-count">
+                  0
+                </span>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="notificationsDropdown" id="notifications-list" style="width: 300px;">
+                <li><h6 class="dropdown-header">Notifications</h6></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item text-center" href="#">No new notifications</a></li>
+              </ul>
+            </div>
+            
+            <div class="dropdown">
+              <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle" id="userDropdownNav" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-person-circle me-2"></i>
+                <span><%= user ? user.name : 'Admin' %></span>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdownNav">
+                <li><a class="dropdown-item" href="/profile">Profile</a></li>
+                <li><a class="dropdown-item" href="/settings">Settings</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="/auth/logout">Sign out</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+      
+      <div class="main-content">
+        <%- body %>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Bootstrap Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Sidebar toggle
+      document.getElementById('sidebarToggle').addEventListener('click', function() {
+        document.getElementById('sidebar').classList.toggle('collapsed');
+        document.getElementById('content').classList.toggle('expanded');
+      });
+      
+      // Update sidebar stats
+      async function updateSidebarStats() {
+        try {
+          const response = await fetch('/api/stats/sidebar');
+          const data = await response.json();
+          
+          if (data.success) {
+            // Update DNS status
+            const dnsStatusEl = document.getElementById('sidebar-dns-status');
+            if (data.data.dnsRunning) {
+              dnsStatusEl.innerHTML = '<span class="badge bg-success">Running</span>';
+            } else {
+              dnsStatusEl.innerHTML = '<span class="badge bg-danger">Stopped</span>';
+            }
+            
+            // Update query counts
+            document.getElementById('sidebar-queries').textContent = data.data.queriesCount.toLocaleString();
+            document.getElementById('sidebar-blocked').textContent = data.data.blockedCount.toLocaleString();
+            
+            // Update notifications
+            if (data.data.notifications && data.data.notifications.length > 0) {
+              const notificationCount = document.getElementById('notification-count');
+              notificationCount.textContent = data.data.notifications.length;
+              notificationCount.style.display = 'inline-block';
+              
+              const notificationsList = document.getElementById('notifications-list');
+              notificationsList.innerHTML = '<li><h6 class="dropdown-header">Notifications</h6></li><li><hr class="dropdown-divider"></li>';
+              
+              data.data.notifications.forEach(notification => {
+                const li = document.createElement('li');
+                li.innerHTML = `
+                  <a class="dropdown-item" href="${notification.link || '#'}">
+                    <div class="d-flex align-items-center">
+                      <div class="me-3">
+                        <i class="bi ${notification.icon || 'bi-bell'} text-${notification.type || 'primary'}"></i>
+                      </div>
+                      <div>
+                        <div class="text-dark">${notification.message}</div>
+                        <div class="text-muted small">${new Date(notification.timestamp).toLocaleString()}</div>
+                      </div>
+                    </div>
+                  </a>
+                `;
+                notificationsList.appendChild(li);
+              });
+              
+              notificationsList.innerHTML += '<li><hr class="dropdown-divider"></li><li><a class="dropdown-item text-center" href="/notifications">View all notifications</a></li>';
+            } else {
+              document.getElementById('notification-count').style.display = 'none';
+              document.getElementById('notifications-list').innerHTML = '<li><h6 class="dropdown-header">Notifications</h6></li><li><hr class="dropdown-divider"></li><li><a class="dropdown-item text-center" href="#">No new notifications</a></li>';
+            }
+          }
+        } catch (error) {
+          console.error('Error updating sidebar stats:', error);
+        }
+      }
+      
+      // Initial update
+      updateSidebarStats();
+      
+      // Update every 60 seconds
+      setInterval(updateSidebarStats, 60000);
+    });
+  </script>
+</body>
+</html>

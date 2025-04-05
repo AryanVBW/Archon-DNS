@@ -59,9 +59,7 @@
       </div>
     </form>
 
-    <div class="text-center mt-4">
-      <p class="mb-0">Don't have an account? <a href="/register" class="text-decoration-none">Sign up</a></p>
-    </div>
+    <!-- Sign-up option removed as requested -->
   </div>
 </div>
 
@@ -90,15 +88,18 @@
         const data = await response.json();
         
         if (response.ok) {
-          // Store token if available
+          // Store token in localStorage and as a cookie
           if (data.token) {
             localStorage.setItem('authToken', data.token);
+            
+            // Set cookie
+            document.cookie = `token=${data.token}; path=/; max-age=${60*60*24}`;
           }
           
           // Redirect to dashboard
           window.location.href = '/dashboard';
         } else {
-          throw new Error(data.message || 'Invalid credentials');
+          throw new Error(data.error || 'Invalid credentials');
         }
       } catch (error) {
         // Display error message

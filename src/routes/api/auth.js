@@ -116,9 +116,19 @@ router.post('/login', async (req, res) => {
       });
     }
     
-    // Create and return JWT token
+    // Create JWT token
     const token = user.getSignedJwtToken();
     
+    // Set token in cookie
+    const cookieOptions = {
+      expires: new Date(Date.now() + 24 * 60 * 60 * 1000), // 24 hours
+      httpOnly: true,
+      secure: config.server.env === 'production'
+    };
+    
+    res.cookie('token', token, cookieOptions);
+    
+    // Return success response with token and user info
     res.status(200).json({
       success: true,
       token,

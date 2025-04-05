@@ -48,11 +48,12 @@ UserSchema.pre('save', async function(next) {
 
 // Sign JWT and return
 UserSchema.methods.getSignedJwtToken = function() {
+  // Use a standard format for JWT expiration (24h)
   return jwt.sign(
     { id: this._id, role: this.role },
     config.jwt.secret,
     {
-      expiresIn: config.jwt.expireTime
+      expiresIn: '24h'
     }
   );
 };

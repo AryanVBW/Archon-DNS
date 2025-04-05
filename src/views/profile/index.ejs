@@ -1,0 +1,298 @@
+<%- contentFor('title') %>
+User Profile - Archon DNS
+
+<%- contentFor('body') %>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-8 mx-auto">
+      <div class="card mb-4">
+        <div class="card-header">
+          <h5 class="mb-0">User Profile</h5>
+        </div>
+        <div class="card-body">
+          <form id="profileForm">
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control" id="name" name="name" value="<%= user.name %>" required>
+              </div>
+              <div class="col-md-6">
+                <label for="email" class="form-label">Email Address</label>
+                <input type="email" class="form-control" id="email" name="email" value="<%= user.email %>" required>
+              </div>
+            </div>
+            
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <label for="role" class="form-label">Role</label>
+                <input type="text" class="form-control" id="role" value="<%= user.role %>" readonly>
+                <div class="form-text">Your account role cannot be changed</div>
+              </div>
+              <div class="col-md-6">
+                <label for="created" class="form-label">Account Created</label>
+                <input type="text" class="form-control" id="created" value="<%= new Date(user.createdAt).toLocaleString() %>" readonly>
+              </div>
+            </div>
+            
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+              <button type="submit" class="btn btn-primary" id="saveProfileBtn">
+                <i class="bi bi-save me-1"></i> Save Changes
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+      
+      <div class="card mb-4">
+        <div class="card-header">
+          <h5 class="mb-0">Change Password</h5>
+        </div>
+        <div class="card-body">
+          <form id="passwordForm">
+            <div class="row mb-3">
+              <div class="col-md-12">
+                <label for="currentPassword" class="form-label">Current Password</label>
+                <input type="password" class="form-control" id="currentPassword" name="currentPassword" required>
+              </div>
+            </div>
+            
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <label for="newPassword" class="form-label">New Password</label>
+                <input type="password" class="form-control" id="newPassword" name="newPassword" required>
+                <div class="form-text">Password must be at least 8 characters long</div>
+              </div>
+              <div class="col-md-6">
+                <label for="confirmPassword" class="form-label">Confirm New Password</label>
+                <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
+              </div>
+            </div>
+            
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+              <button type="submit" class="btn btn-primary" id="changePasswordBtn">
+                <i class="bi bi-key me-1"></i> Change Password
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+      
+      <div class="card">
+        <div class="card-header">
+          <h5 class="mb-0">API Access</h5>
+        </div>
+        <div class="card-body">
+          <div class="row mb-3">
+            <div class="col-md-12">
+              <label for="apiKey" class="form-label">API Key</label>
+              <div class="input-group">
+                <input type="text" class="form-control" id="apiKey" value="<%= user.apiKey || '' %>" readonly>
+                <button class="btn btn-outline-secondary" type="button" id="copyApiKeyBtn">
+                  <i class="bi bi-clipboard"></i>
+                </button>
+              </div>
+              <div class="form-text">Use this key to authenticate API requests</div>
+            </div>
+          </div>
+          
+          <div class="row mb-3">
+            <div class="col-md-12">
+              <div class="d-flex justify-content-between align-items-center">
+                <div>
+                  <h6 class="mb-0">API Access Status</h6>
+                  <p class="text-muted mb-0">Enable or disable API access for your account</p>
+                </div>
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" id="apiEnabled" <%= user.apiEnabled ? 'checked' : '' %>>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <button type="button" class="btn btn-warning" id="regenerateApiKeyBtn">
+              <i class="bi bi-arrow-repeat me-1"></i> Regenerate API Key
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Profile form submission
+    document.getElementById('profileForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      updateProfile();
+    });
+    
+    // Password form submission
+    document.getElementById('passwordForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      changePassword();
+    });
+    
+    // Copy API key button
+    document.getElementById('copyApiKeyBtn').addEventListener('click', function() {
+      copyToClipboard(document.getElementById('apiKey').value);
+      showAlert('success', 'API key copied to clipboard');
+    });
+    
+    // Regenerate API key button
+    document.getElementById('regenerateApiKeyBtn').addEventListener('click', function() {
+      if (confirm('Are you sure you want to regenerate your API key? This will invalidate your current key.')) {
+        regenerateApiKey();
+      }
+    });
+    
+    // API access toggle
+    document.getElementById('apiEnabled').addEventListener('change', function() {
+      toggleApiAccess(this.checked);
+    });
+  });
+  
+  // Update user profile
+  async function updateProfile() {
+    try {
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      
+      const response = await fetch('/api/users/profile', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ name, email })
+      });
+      
+      const data = await response.json();
+      
+      if (data.success) {
+        showAlert('success', 'Profile updated successfully');
+      } else {
+        showAlert('danger', 'Failed to update profile: ' + data.error);
+      }
+    } catch (error) {
+      showAlert('danger', 'Error updating profile: ' + error.message);
+    }
+  }
+  
+  // Change password
+  async function changePassword() {
+    try {
+      const currentPassword = document.getElementById('currentPassword').value;
+      const newPassword = document.getElementById('newPassword').value;
+      const confirmPassword = document.getElementById('confirmPassword').value;
+      
+      if (newPassword !== confirmPassword) {
+        showAlert('danger', 'New passwords do not match');
+        return;
+      }
+      
+      if (newPassword.length < 8) {
+        showAlert('danger', 'Password must be at least 8 characters long');
+        return;
+      }
+      
+      const response = await fetch('/api/users/password', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ currentPassword, newPassword })
+      });
+      
+      const data = await response.json();
+      
+      if (data.success) {
+        showAlert('success', 'Password changed successfully');
+        document.getElementById('passwordForm').reset();
+      } else {
+        showAlert('danger', 'Failed to change password: ' + data.error);
+      }
+    } catch (error) {
+      showAlert('danger', 'Error changing password: ' + error.message);
+    }
+  }
+  
+  // Regenerate API key
+  async function regenerateApiKey() {
+    try {
+      const response = await fetch('/api/users/api-key', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      
+      const data = await response.json();
+      
+      if (data.success) {
+        document.getElementById('apiKey').value = data.apiKey;
+        showAlert('success', 'API key regenerated successfully');
+      } else {
+        showAlert('danger', 'Failed to regenerate API key: ' + data.error);
+      }
+    } catch (error) {
+      showAlert('danger', 'Error regenerating API key: ' + error.message);
+    }
+  }
+  
+  // Toggle API access
+  async function toggleApiAccess(enabled) {
+    try {
+      const response = await fetch('/api/users/api-access', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ enabled })
+      });
+      
+      const data = await response.json();
+      
+      if (data.success) {
+        showAlert('success', `API access ${enabled ? 'enabled' : 'disabled'} successfully`);
+      } else {
+        // Revert the toggle if there was an error
+        document.getElementById('apiEnabled').checked = !enabled;
+        showAlert('danger', 'Failed to update API access: ' + data.error);
+      }
+    } catch (error) {
+      // Revert the toggle if there was an error
+      document.getElementById('apiEnabled').checked = !enabled;
+      showAlert('danger', 'Error updating API access: ' + error.message);
+    }
+  }
+  
+  // Copy to clipboard helper
+  function copyToClipboard(text) {
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textarea);
+  }
+  
+  // Show alert message
+  function showAlert(type, message) {
+    const alertDiv = document.createElement('div');
+    alertDiv.className = `alert alert-${type} alert-dismissible fade show`;
+    alertDiv.role = 'alert';
+    alertDiv.innerHTML = `
+      ${message}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    `;
+    
+    document.querySelector('.card-header').after(alertDiv);
+    
+    // Auto-dismiss after 5 seconds
+    setTimeout(() => {
+      alertDiv.classList.remove('show');
+      setTimeout(() => alertDiv.remove(), 150);
+    }, 5000);
+  }
+</script>

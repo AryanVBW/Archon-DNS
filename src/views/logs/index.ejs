@@ -1,0 +1,682 @@
+<%- contentFor('title') %>
+DNS Query Logs - Archon DNS
+
+<%- contentFor('body') %>
+<div class="container-fluid">
+  <div class="row mb-3">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="mb-0">DNS Query Logs</h5>
+        </div>
+        <div class="card-body">
+          <div class="row mb-3">
+            <div class="col-md-3">
+              <div class="input-group">
+                <span class="input-group-text">Domain</span>
+                <input type="text" class="form-control" id="domainFilter" placeholder="Filter by domain">
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="input-group">
+                <span class="input-group-text">Client IP</span>
+                <input type="text" class="form-control" id="clientIpFilter" placeholder="Filter by IP">
+              </div>
+            </div>
+            <div class="col-md-2">
+              <select class="form-select" id="typeFilter">
+                <option value="">All Query Types</option>
+                <option value="A">A</option>
+                <option value="AAAA">AAAA</option>
+                <option value="CNAME">CNAME</option>
+                <option value="MX">MX</option>
+                <option value="TXT">TXT</option>
+                <option value="NS">NS</option>
+                <option value="SOA">SOA</option>
+                <option value="PTR">PTR</option>
+              </select>
+            </div>
+            <div class="col-md-2">
+              <select class="form-select" id="statusFilter">
+                <option value="">All Status</option>
+                <option value="blocked">Blocked</option>
+                <option value="redirected">Redirected</option>
+                <option value="normal">Normal</option>
+              </select>
+            </div>
+            <div class="col-md-3">
+              <div class="input-group">
+                <input type="date" class="form-control" id="dateFilter">
+                <button class="btn btn-primary" id="applyFilters">
+                  <i class="bi bi-funnel"></i> Filter
+                </button>
+                <button class="btn btn-outline-secondary" id="resetFilters">
+                  <i class="bi bi-x-circle"></i> Reset
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          <div class="table-responsive">
+            <table class="table table-striped table-hover" id="queryLogsTable">
+              <thead>
+                <tr>
+                  <th>Timestamp</th>
+                  <th>Domain</th>
+                  <th>Type</th>
+                  <th>Client IP</th>
+                  <th>Status</th>
+                  <th>Response Time</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Logs will be loaded here via JavaScript -->
+              </tbody>
+            </table>
+          </div>
+          
+          <div class="d-flex justify-content-between align-items-center mt-3">
+            <div class="pagination-info">
+              Showing <span id="paginationStart">0</span> to <span id="paginationEnd">0</span> of <span id="totalRecords">0</span> records
+            </div>
+            <nav aria-label="Query logs pagination">
+              <ul class="pagination" id="pagination">
+                <!-- Pagination will be generated here -->
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="mb-0">Top Domains</h5>
+        </div>
+        <div class="card-body">
+          <canvas id="topDomainsChart" height="300"></canvas>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="mb-0">Query Types Distribution</h5>
+        </div>
+        <div class="card-body">
+          <canvas id="queryTypesChart" height="300"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Log Details Modal -->
+<div class="modal fade" id="logDetailsModal" tabindex="-1" aria-labelledby="logDetailsModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="logDetailsModalLabel">DNS Query Details</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-6">
+            <h6>Basic Information</h6>
+            <table class="table table-sm">
+              <tr>
+                <th>Timestamp</th>
+                <td id="detailTimestamp"></td>
+              </tr>
+              <tr>
+                <th>Domain</th>
+                <td id="detailDomain"></td>
+              </tr>
+              <tr>
+                <th>Query Type</th>
+                <td id="detailQueryType"></td>
+              </tr>
+              <tr>
+                <th>Client IP</th>
+                <td id="detailClientIp"></td>
+              </tr>
+              <tr>
+                <th>Response Time</th>
+                <td id="detailResponseTime"></td>
+              </tr>
+            </table>
+          </div>
+          <div class="col-md-6">
+            <h6>Response Information</h6>
+            <table class="table table-sm">
+              <tr>
+                <th>Status</th>
+                <td id="detailStatus"></td>
+              </tr>
+              <tr>
+                <th>Blocked</th>
+                <td id="detailBlocked"></td>
+              </tr>
+              <tr>
+                <th>Block Reason</th>
+                <td id="detailBlockReason"></td>
+              </tr>
+              <tr>
+                <th>Redirected</th>
+                <td id="detailRedirected"></td>
+              </tr>
+              <tr>
+                <th>Redirect Target</th>
+                <td id="detailRedirectTarget"></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        
+        <div class="mt-3">
+          <h6>Actions</h6>
+          <div class="d-flex gap-2">
+            <button type="button" class="btn btn-sm btn-outline-danger" id="blockDomainBtn">
+              <i class="bi bi-shield-x"></i> Block This Domain
+            </button>
+            <button type="button" class="btn btn-sm btn-outline-primary" id="whoisBtn">
+              <i class="bi bi-info-circle"></i> WHOIS Lookup
+            </button>
+            <button type="button" class="btn btn-sm btn-outline-secondary" id="lookupBtn">
+              <i class="bi bi-search"></i> DNS Lookup
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Block Domain Modal -->
+<div class="modal fade" id="blockDomainModal" tabindex="-1" aria-labelledby="blockDomainModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="blockDomainModalLabel">Block Domain</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="blockDomainForm">
+          <div class="mb-3">
+            <label for="blockDomainName" class="form-label">Domain</label>
+            <input type="text" class="form-control" id="blockDomainName" readonly>
+          </div>
+          
+          <div class="mb-3">
+            <label for="blockCategory" class="form-label">Category</label>
+            <select class="form-select" id="blockCategory" required>
+              <option value="custom">Custom</option>
+              <option value="ads">Advertisements</option>
+              <option value="malware">Malware/Phishing</option>
+              <option value="adult">Adult Content</option>
+              <option value="social">Social Media</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          
+          <div class="mb-3">
+            <label for="blockDescription" class="form-label">Description</label>
+            <textarea class="form-control" id="blockDescription" rows="2"></textarea>
+          </div>
+          
+          <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="blockUseRedirect">
+            <label class="form-check-label" for="blockUseRedirect">Redirect Instead of Blocking</label>
+          </div>
+          
+          <div class="mb-3" id="blockRedirectToGroup" style="display: none;">
+            <label for="blockRedirectTo" class="form-label">Redirect To (IP Address)</label>
+            <input type="text" class="form-control" id="blockRedirectTo" placeholder="e.g., 192.168.1.1">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-danger" id="confirmBlockBtn">Block Domain</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+<script>
+  // Global variables
+  let currentPage = 1;
+  let totalPages = 1;
+  let pageSize = 25;
+  let topDomainsChart = null;
+  let queryTypesChart = null;
+  
+  document.addEventListener('DOMContentLoaded', function() {
+    // Load query logs when the page loads
+    loadQueryLogs();
+    
+    // Load statistics
+    loadStatistics();
+    
+    // Filter button click handler
+    document.getElementById('applyFilters').addEventListener('click', function() {
+      currentPage = 1;
+      loadQueryLogs();
+    });
+    
+    // Reset filters button click handler
+    document.getElementById('resetFilters').addEventListener('click', function() {
+      document.getElementById('domainFilter').value = '';
+      document.getElementById('clientIpFilter').value = '';
+      document.getElementById('typeFilter').value = '';
+      document.getElementById('statusFilter').value = '';
+      document.getElementById('dateFilter').value = '';
+      currentPage = 1;
+      loadQueryLogs();
+    });
+    
+    // Block domain button click handler
+    document.getElementById('blockDomainBtn').addEventListener('click', function() {
+      const domain = document.getElementById('detailDomain').textContent;
+      document.getElementById('blockDomainName').value = domain;
+      $('#logDetailsModal').modal('hide');
+      $('#blockDomainModal').modal('show');
+    });
+    
+    // Toggle redirect input visibility in block domain modal
+    document.getElementById('blockUseRedirect').addEventListener('change', function() {
+      document.getElementById('blockRedirectToGroup').style.display = this.checked ? 'block' : 'none';
+    });
+    
+    // Confirm block domain button click handler
+    document.getElementById('confirmBlockBtn').addEventListener('click', blockDomain);
+  });
+  
+  // Load query logs from API
+  async function loadQueryLogs() {
+    try {
+      // Get filter values
+      const domain = document.getElementById('domainFilter').value;
+      const clientIp = document.getElementById('clientIpFilter').value;
+      const queryType = document.getElementById('typeFilter').value;
+      const status = document.getElementById('statusFilter').value;
+      const date = document.getElementById('dateFilter').value;
+      
+      // Build query parameters
+      let queryParams = `page=${currentPage}&limit=${pageSize}`;
+      if (domain) queryParams += `&domain=${encodeURIComponent(domain)}`;
+      if (clientIp) queryParams += `&clientIp=${encodeURIComponent(clientIp)}`;
+      if (queryType) queryParams += `&queryType=${encodeURIComponent(queryType)}`;
+      if (status) queryParams += `&status=${encodeURIComponent(status)}`;
+      if (date) queryParams += `&date=${encodeURIComponent(date)}`;
+      
+      const response = await fetch(`/api/query-logs?${queryParams}`);
+      const data = await response.json();
+      
+      if (data.success) {
+        const tableBody = document.querySelector('#queryLogsTable tbody');
+        tableBody.innerHTML = '';
+        
+        if (data.data.logs.length === 0) {
+          tableBody.innerHTML = '<tr><td colspan="7" class="text-center">No query logs found</td></tr>';
+          document.getElementById('paginationStart').textContent = '0';
+          document.getElementById('paginationEnd').textContent = '0';
+          document.getElementById('totalRecords').textContent = '0';
+          document.getElementById('pagination').innerHTML = '';
+          return;
+        }
+        
+        data.data.logs.forEach(log => {
+          const row = document.createElement('tr');
+          
+          // Determine status badge
+          let statusBadge = '<span class="badge bg-success">Normal</span>';
+          if (log.blocked) {
+            statusBadge = '<span class="badge bg-danger">Blocked</span>';
+          } else if (log.redirected) {
+            statusBadge = '<span class="badge bg-warning text-dark">Redirected</span>';
+          }
+          
+          row.innerHTML = `
+            <td>${new Date(log.timestamp).toLocaleString()}</td>
+            <td>${log.domain}</td>
+            <td><span class="badge bg-secondary">${log.queryType}</span></td>
+            <td>${log.clientIp}</td>
+            <td>${statusBadge}</td>
+            <td>${log.responseTime.toFixed(2)} ms</td>
+            <td>
+              <button class="btn btn-sm btn-outline-info view-details" data-id="${log._id}">
+                <i class="bi bi-info-circle"></i>
+              </button>
+            </td>
+          `;
+          tableBody.appendChild(row);
+        });
+        
+        // Update pagination info
+        const start = (currentPage - 1) * pageSize + 1;
+        const end = Math.min(start + data.data.logs.length - 1, data.data.total);
+        document.getElementById('paginationStart').textContent = start;
+        document.getElementById('paginationEnd').textContent = end;
+        document.getElementById('totalRecords').textContent = data.data.total;
+        
+        // Generate pagination
+        totalPages = Math.ceil(data.data.total / pageSize);
+        generatePagination(totalPages, currentPage);
+        
+        // Add event listeners to view details buttons
+        document.querySelectorAll('.view-details').forEach(btn => {
+          btn.addEventListener('click', () => viewLogDetails(btn.dataset.id));
+        });
+      } else {
+        showAlert('danger', 'Failed to load query logs: ' + data.error);
+      }
+    } catch (error) {
+      showAlert('danger', 'Error loading query logs: ' + error.message);
+    }
+  }
+  
+  // Generate pagination controls
+  function generatePagination(totalPages, currentPage) {
+    const pagination = document.getElementById('pagination');
+    pagination.innerHTML = '';
+    
+    // Previous button
+    const prevLi = document.createElement('li');
+    prevLi.className = `page-item ${currentPage === 1 ? 'disabled' : ''}`;
+    prevLi.innerHTML = `<a class="page-link" href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>`;
+    if (currentPage > 1) {
+      prevLi.querySelector('a').addEventListener('click', (e) => {
+        e.preventDefault();
+        currentPage--;
+        loadQueryLogs();
+      });
+    }
+    pagination.appendChild(prevLi);
+    
+    // Page numbers
+    const maxVisiblePages = 5;
+    let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
+    let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+    
+    if (endPage - startPage + 1 < maxVisiblePages) {
+      startPage = Math.max(1, endPage - maxVisiblePages + 1);
+    }
+    
+    for (let i = startPage; i <= endPage; i++) {
+      const pageLi = document.createElement('li');
+      pageLi.className = `page-item ${i === currentPage ? 'active' : ''}`;
+      pageLi.innerHTML = `<a class="page-link" href="#">${i}</a>`;
+      pageLi.querySelector('a').addEventListener('click', (e) => {
+        e.preventDefault();
+        currentPage = i;
+        loadQueryLogs();
+      });
+      pagination.appendChild(pageLi);
+    }
+    
+    // Next button
+    const nextLi = document.createElement('li');
+    nextLi.className = `page-item ${currentPage === totalPages ? 'disabled' : ''}`;
+    nextLi.innerHTML = `<a class="page-link" href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>`;
+    if (currentPage < totalPages) {
+      nextLi.querySelector('a').addEventListener('click', (e) => {
+        e.preventDefault();
+        currentPage++;
+        loadQueryLogs();
+      });
+    }
+    pagination.appendChild(nextLi);
+  }
+  
+  // Load statistics for charts
+  async function loadStatistics() {
+    try {
+      const response = await fetch('/api/stats/dns');
+      const data = await response.json();
+      
+      if (data.success) {
+        // Create Top Domains chart
+        createTopDomainsChart(data.data.topDomains);
+        
+        // Create Query Types chart
+        createQueryTypesChart(data.data.queryTypes);
+      } else {
+        showAlert('danger', 'Failed to load statistics: ' + data.error);
+      }
+    } catch (error) {
+      showAlert('danger', 'Error loading statistics: ' + error.message);
+    }
+  }
+  
+  // Create Top Domains chart
+  function createTopDomainsChart(topDomains) {
+    const ctx = document.getElementById('topDomainsChart').getContext('2d');
+    
+    if (topDomainsChart) {
+      topDomainsChart.destroy();
+    }
+    
+    const labels = topDomains.map(item => item.domain);
+    const data = topDomains.map(item => item.count);
+    
+    topDomainsChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: 'Query Count',
+          data: data,
+          backgroundColor: 'rgba(54, 162, 235, 0.7)',
+          borderColor: 'rgba(54, 162, 235, 1)',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                return `Queries: ${context.raw}`;
+              }
+            }
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            ticks: {
+              precision: 0
+            }
+          }
+        }
+      }
+    });
+  }
+  
+  // Create Query Types chart
+  function createQueryTypesChart(queryTypes) {
+    const ctx = document.getElementById('queryTypesChart').getContext('2d');
+    
+    if (queryTypesChart) {
+      queryTypesChart.destroy();
+    }
+    
+    const labels = queryTypes.map(item => item.type);
+    const data = queryTypes.map(item => item.count);
+    
+    // Generate colors
+    const backgroundColors = [
+      'rgba(255, 99, 132, 0.7)',
+      'rgba(54, 162, 235, 0.7)',
+      'rgba(255, 206, 86, 0.7)',
+      'rgba(75, 192, 192, 0.7)',
+      'rgba(153, 102, 255, 0.7)',
+      'rgba(255, 159, 64, 0.7)',
+      'rgba(199, 199, 199, 0.7)',
+      'rgba(83, 102, 255, 0.7)'
+    ];
+    
+    const borderColors = backgroundColors.map(color => color.replace('0.7', '1'));
+    
+    queryTypesChart = new Chart(ctx, {
+      type: 'doughnut',
+      data: {
+        labels: labels,
+        datasets: [{
+          data: data,
+          backgroundColor: backgroundColors,
+          borderColor: borderColors,
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            position: 'right'
+          },
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                const label = context.label || '';
+                const value = context.raw;
+                const total = context.dataset.data.reduce((acc, val) => acc + val, 0);
+                const percentage = Math.round((value / total) * 100);
+                return `${label}: ${value} (${percentage}%)`;
+              }
+            }
+          }
+        }
+      }
+    });
+  }
+  
+  // View log details
+  async function viewLogDetails(logId) {
+    try {
+      const response = await fetch(`/api/query-logs/${logId}`);
+      const data = await response.json();
+      
+      if (data.success) {
+        const log = data.data;
+        
+        // Populate modal with log details
+        document.getElementById('detailTimestamp').textContent = new Date(log.timestamp).toLocaleString();
+        document.getElementById('detailDomain').textContent = log.domain;
+        document.getElementById('detailQueryType').textContent = log.queryType;
+        document.getElementById('detailClientIp').textContent = log.clientIp;
+        document.getElementById('detailResponseTime').textContent = `${log.responseTime.toFixed(2)} ms`;
+        
+        // Status
+        let status = 'Normal';
+        if (log.blocked) status = 'Blocked';
+        else if (log.redirected) status = 'Redirected';
+        document.getElementById('detailStatus').textContent = status;
+        
+        // Blocked
+        document.getElementById('detailBlocked').textContent = log.blocked ? 'Yes' : 'No';
+        document.getElementById('detailBlockReason').textContent = log.blockReason || 'N/A';
+        
+        // Redirected
+        document.getElementById('detailRedirected').textContent = log.redirected ? 'Yes' : 'No';
+        document.getElementById('detailRedirectTarget').textContent = log.redirectTarget || 'N/A';
+        
+        // Show the modal
+        $('#logDetailsModal').modal('show');
+        
+        // Set up WHOIS and DNS lookup buttons
+        document.getElementById('whoisBtn').onclick = () => {
+          window.open(`https://whois.domaintools.com/${log.domain}`, '_blank');
+        };
+        
+        document.getElementById('lookupBtn').onclick = () => {
+          window.open(`https://dnschecker.org/#A/${log.domain}`, '_blank');
+        };
+      } else {
+        showAlert('danger', 'Failed to load log details: ' + data.error);
+      }
+    } catch (error) {
+      showAlert('danger', 'Error loading log details: ' + error.message);
+    }
+  }
+  
+  // Block domain from log
+  async function blockDomain() {
+    const form = document.getElementById('blockDomainForm');
+    
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+    
+    const domain = document.getElementById('blockDomainName').value;
+    const category = document.getElementById('blockCategory').value;
+    const description = document.getElementById('blockDescription').value;
+    const useRedirect = document.getElementById('blockUseRedirect').checked;
+    const redirectTo = useRedirect ? document.getElementById('blockRedirectTo').value : null;
+    
+    try {
+      const response = await fetch('/api/block-rules', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ 
+          domain, 
+          isRegex: false, 
+          category, 
+          description, 
+          redirectTo, 
+          isActive: true 
+        })
+      });
+      
+      const data = await response.json();
+      
+      if (data.success) {
+        showAlert('success', `Domain "${domain}" has been blocked successfully`);
+        $('#blockDomainModal').modal('hide');
+        form.reset();
+        document.getElementById('blockRedirectToGroup').style.display = 'none';
+      } else {
+        showAlert('danger', 'Failed to block domain: ' + data.error);
+      }
+    } catch (error) {
+      showAlert('danger', 'Error blocking domain: ' + error.message);
+    }
+  }
+  
+  // Show alert message
+  function showAlert(type, message) {
+    const alertDiv = document.createElement('div');
+    alertDiv.className = `alert alert-${type} alert-dismissible fade show`;
+    alertDiv.role = 'alert';
+    alertDiv.innerHTML = `
+      ${message}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    `;
+    
+    document.querySelector('.card-header').after(alertDiv);
+    
+    // Auto-dismiss after 5 seconds
+    setTimeout(() => {
+      alertDiv.classList.remove('show');
+      setTimeout(() => alertDiv.remove(), 150);
+    }, 5000);
+  }
+</script>

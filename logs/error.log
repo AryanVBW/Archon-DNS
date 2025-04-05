@@ -7,3 +7,171 @@
 2025-04-05 16:53:20 error: MongoDB connection error: connect ECONNREFUSED ::1:27017
 2025-04-05 16:53:42 error: MongoDB connection error: connect ECONNREFUSED 127.0.0.1:27017
 2025-04-05 16:54:07 error: MongoDB connection error: connect ECONNREFUSED 127.0.0.1:27017
+2025-04-05 23:44:41 error: Server error: Failed to lookup view "index" in views directory "/Volumes/DATA_vivek/GITHUB/Archon-DNS/src/views"
+2025-04-05 23:44:41 error: Error: Failed to lookup view "index" in views directory "/Volumes/DATA_vivek/GITHUB/Archon-DNS/src/views"
+    at Function.render (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/application.js:597:17)
+    at ServerResponse.render (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/response.js:1049:7)
+    at res.render (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express-ejs-layouts/lib/express-layouts.js:77:18)
+    at /Volumes/DATA_vivek/GITHUB/Archon-DNS/src/routes/web/index.js:53:7
+    at Layer.handle [as handle_request] (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/route.js:149:13)
+    at Route.dispatch (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/route.js:119:3)
+    at Layer.handle [as handle_request] (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/layer.js:95:5)
+    at /Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/index.js:346:12)
+2025-04-05 23:44:47 error: Server error: Failed to lookup view "index" in views directory "/Volumes/DATA_vivek/GITHUB/Archon-DNS/src/views"
+2025-04-05 23:44:47 error: Error: Failed to lookup view "index" in views directory "/Volumes/DATA_vivek/GITHUB/Archon-DNS/src/views"
+    at Function.render (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/application.js:597:17)
+    at ServerResponse.render (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/response.js:1049:7)
+    at res.render (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express-ejs-layouts/lib/express-layouts.js:77:18)
+    at /Volumes/DATA_vivek/GITHUB/Archon-DNS/src/routes/web/index.js:53:7
+    at Layer.handle [as handle_request] (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/route.js:149:13)
+    at Route.dispatch (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/route.js:119:3)
+    at Layer.handle [as handle_request] (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/layer.js:95:5)
+    at /Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/index.js:346:12)
+2025-04-05 23:44:57 error: Server error: Failed to lookup view "auth/register" in views directory "/Volumes/DATA_vivek/GITHUB/Archon-DNS/src/views"
+2025-04-05 23:44:57 error: Error: Failed to lookup view "auth/register" in views directory "/Volumes/DATA_vivek/GITHUB/Archon-DNS/src/views"
+    at Function.render (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/application.js:597:17)
+    at ServerResponse.render (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/response.js:1049:7)
+    at res.render (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express-ejs-layouts/lib/express-layouts.js:77:18)
+    at /Volumes/DATA_vivek/GITHUB/Archon-DNS/src/routes/web/index.js:75:7
+    at Layer.handle [as handle_request] (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/route.js:149:13)
+    at Route.dispatch (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/route.js:119:3)
+    at Layer.handle [as handle_request] (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/layer.js:95:5)
+    at /Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/index.js:346:12)
+2025-04-05 23:45:05 error: Server error: Failed to lookup view "index" in views directory "/Volumes/DATA_vivek/GITHUB/Archon-DNS/src/views"
+2025-04-05 23:45:05 error: Error: Failed to lookup view "index" in views directory "/Volumes/DATA_vivek/GITHUB/Archon-DNS/src/views"
+    at Function.render (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/application.js:597:17)
+    at ServerResponse.render (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/response.js:1049:7)
+    at res.render (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express-ejs-layouts/lib/express-layouts.js:77:18)
+    at /Volumes/DATA_vivek/GITHUB/Archon-DNS/src/routes/web/index.js:53:7
+    at Layer.handle [as handle_request] (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/route.js:149:13)
+    at Route.dispatch (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/route.js:119:3)
+    at Layer.handle [as handle_request] (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/layer.js:95:5)
+    at /Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/index.js:346:12)
+2025-04-05 23:45:05 error: Server error: Failed to lookup view "index" in views directory "/Volumes/DATA_vivek/GITHUB/Archon-DNS/src/views"
+2025-04-05 23:45:05 error: Error: Failed to lookup view "index" in views directory "/Volumes/DATA_vivek/GITHUB/Archon-DNS/src/views"
+    at Function.render (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/application.js:597:17)
+    at ServerResponse.render (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/response.js:1049:7)
+    at res.render (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express-ejs-layouts/lib/express-layouts.js:77:18)
+    at /Volumes/DATA_vivek/GITHUB/Archon-DNS/src/routes/web/index.js:53:7
+    at Layer.handle [as handle_request] (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/route.js:149:13)
+    at Route.dispatch (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/route.js:119:3)
+    at Layer.handle [as handle_request] (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/layer.js:95:5)
+    at /Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/index.js:346:12)
+2025-04-05 23:45:06 error: Server error: Failed to lookup view "index" in views directory "/Volumes/DATA_vivek/GITHUB/Archon-DNS/src/views"
+2025-04-05 23:45:06 error: Error: Failed to lookup view "index" in views directory "/Volumes/DATA_vivek/GITHUB/Archon-DNS/src/views"
+    at Function.render (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/application.js:597:17)
+    at ServerResponse.render (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/response.js:1049:7)
+    at res.render (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express-ejs-layouts/lib/express-layouts.js:77:18)
+    at /Volumes/DATA_vivek/GITHUB/Archon-DNS/src/routes/web/index.js:53:7
+    at Layer.handle [as handle_request] (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/route.js:149:13)
+    at Route.dispatch (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/route.js:119:3)
+    at Layer.handle [as handle_request] (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/layer.js:95:5)
+    at /Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/index.js:346:12)
+2025-04-05 23:46:09 error: Server error: Failed to lookup view "index" in views directory "/Volumes/DATA_vivek/GITHUB/Archon-DNS/src/views"
+2025-04-05 23:46:09 error: Error: Failed to lookup view "index" in views directory "/Volumes/DATA_vivek/GITHUB/Archon-DNS/src/views"
+    at Function.render (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/application.js:597:17)
+    at ServerResponse.render (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/response.js:1049:7)
+    at res.render (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express-ejs-layouts/lib/express-layouts.js:77:18)
+    at /Volumes/DATA_vivek/GITHUB/Archon-DNS/src/routes/web/index.js:53:7
+    at Layer.handle [as handle_request] (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/route.js:149:13)
+    at Route.dispatch (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/route.js:119:3)
+    at Layer.handle [as handle_request] (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/layer.js:95:5)
+    at /Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/index.js:346:12)
+2025-04-05 23:46:17 error: Server error: Failed to lookup view "index" in views directory "/Volumes/DATA_vivek/GITHUB/Archon-DNS/src/views"
+2025-04-05 23:46:17 error: Error: Failed to lookup view "index" in views directory "/Volumes/DATA_vivek/GITHUB/Archon-DNS/src/views"
+    at Function.render (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/application.js:597:17)
+    at ServerResponse.render (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/response.js:1049:7)
+    at res.render (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express-ejs-layouts/lib/express-layouts.js:77:18)
+    at /Volumes/DATA_vivek/GITHUB/Archon-DNS/src/routes/web/index.js:53:7
+    at Layer.handle [as handle_request] (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/route.js:149:13)
+    at Route.dispatch (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/route.js:119:3)
+    at Layer.handle [as handle_request] (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/layer.js:95:5)
+    at /Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/index.js:346:12)
+2025-04-05 23:46:31 error: Server error: Failed to lookup view "auth/register" in views directory "/Volumes/DATA_vivek/GITHUB/Archon-DNS/src/views"
+2025-04-05 23:46:31 error: Error: Failed to lookup view "auth/register" in views directory "/Volumes/DATA_vivek/GITHUB/Archon-DNS/src/views"
+    at Function.render (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/application.js:597:17)
+    at ServerResponse.render (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/response.js:1049:7)
+    at res.render (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express-ejs-layouts/lib/express-layouts.js:77:18)
+    at /Volumes/DATA_vivek/GITHUB/Archon-DNS/src/routes/web/index.js:75:7
+    at Layer.handle [as handle_request] (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/route.js:149:13)
+    at Route.dispatch (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/route.js:119:3)
+    at Layer.handle [as handle_request] (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/layer.js:95:5)
+    at /Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/index.js:346:12)
+2025-04-05 23:47:56 error: Server error: Failed to lookup view "index" in views directory "/Volumes/DATA_vivek/GITHUB/Archon-DNS/src/views"
+2025-04-05 23:47:56 error: Error: Failed to lookup view "index" in views directory "/Volumes/DATA_vivek/GITHUB/Archon-DNS/src/views"
+    at Function.render (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/application.js:597:17)
+    at ServerResponse.render (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/response.js:1049:7)
+    at res.render (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express-ejs-layouts/lib/express-layouts.js:77:18)
+    at /Volumes/DATA_vivek/GITHUB/Archon-DNS/src/routes/web/index.js:53:7
+    at Layer.handle [as handle_request] (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/route.js:149:13)
+    at Route.dispatch (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/route.js:119:3)
+    at Layer.handle [as handle_request] (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/layer.js:95:5)
+    at /Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/index.js:346:12)
+2025-04-05 23:49:13 error: Server error: Failed to lookup view "auth/register" in views directory "/Volumes/DATA_vivek/GITHUB/Archon-DNS/src/views"
+2025-04-05 23:49:13 error: Error: Failed to lookup view "auth/register" in views directory "/Volumes/DATA_vivek/GITHUB/Archon-DNS/src/views"
+    at Function.render (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/application.js:597:17)
+    at ServerResponse.render (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/response.js:1049:7)
+    at res.render (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express-ejs-layouts/lib/express-layouts.js:77:18)
+    at /Volumes/DATA_vivek/GITHUB/Archon-DNS/src/routes/web/index.js:75:7
+    at Layer.handle [as handle_request] (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/route.js:149:13)
+    at Route.dispatch (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/route.js:119:3)
+    at Layer.handle [as handle_request] (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/layer.js:95:5)
+    at /Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/index.js:346:12)
+2025-04-05 23:49:28 error: Server error: Failed to lookup view "auth/register" in views directory "/Volumes/DATA_vivek/GITHUB/Archon-DNS/src/views"
+2025-04-05 23:49:28 error: Error: Failed to lookup view "auth/register" in views directory "/Volumes/DATA_vivek/GITHUB/Archon-DNS/src/views"
+    at Function.render (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/application.js:597:17)
+    at ServerResponse.render (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/response.js:1049:7)
+    at res.render (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express-ejs-layouts/lib/express-layouts.js:77:18)
+    at /Volumes/DATA_vivek/GITHUB/Archon-DNS/src/routes/web/index.js:75:7
+    at Layer.handle [as handle_request] (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/route.js:149:13)
+    at Route.dispatch (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/route.js:119:3)
+    at Layer.handle [as handle_request] (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/layer.js:95:5)
+    at /Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/router/index.js:346:12)
+2025-04-06 00:06:22 error: Login error: "expiresIn" should be a number of seconds or string representing a timespan
+2025-04-06 00:06:46 error: Login error: "expiresIn" should be a number of seconds or string representing a timespan
+2025-04-06 00:06:47 error: Login error: "expiresIn" should be a number of seconds or string representing a timespan
+2025-04-06 00:06:49 error: Login error: "expiresIn" should be a number of seconds or string representing a timespan
+2025-04-06 00:06:49 error: Login error: "expiresIn" should be a number of seconds or string representing a timespan
+2025-04-06 00:06:49 error: Login error: "expiresIn" should be a number of seconds or string representing a timespan
+2025-04-06 00:07:58 error: Login error: "expiresIn" should be a number of seconds or string representing a timespan
+2025-04-06 00:09:22 error: Login error: "expiresIn" should be a number of seconds or string representing a timespan
+2025-04-06 00:09:26 error: Login error: "expiresIn" should be a number of seconds or string representing a timespan
+2025-04-06 00:09:47 error: Login error: "expiresIn" should be a number of seconds or string representing a timespan
+2025-04-06 00:11:40 error: Failed to start web server: listen EADDRINUSE: address already in use :::3000
+2025-04-06 00:11:40 error: Uncaught Exception: listen EADDRINUSE: address already in use :::3000
+2025-04-06 00:11:40 error: Error: listen EADDRINUSE: address already in use :::3000
+    at Server.setupListenHandle [as _listen2] (node:net:1817:16)
+    at listenInCluster (node:net:1865:12)
+    at Server.listen (node:net:1953:7)
+    at Function.listen (/Volumes/DATA_vivek/GITHUB/Archon-DNS/node_modules/express/lib/application.js:635:24)
+    at /Volumes/DATA_vivek/GITHUB/Archon-DNS/src/web-server.js:198:32
+    at new Promise (<anonymous>)
+    at WebServer.start (/Volumes/DATA_vivek/GITHUB/Archon-DNS/src/web-server.js:197:14)
+    at start (/Volumes/DATA_vivek/GITHUB/Archon-DNS/src/index.js:80:38)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-04-06 00:12:21 error: Login error: "expiresIn" should be a number of seconds or string representing a timespan
+2025-04-06 00:12:46 error: Login error: "expiresIn" should be a number of seconds or string representing a timespan

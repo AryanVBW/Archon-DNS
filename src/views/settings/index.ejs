@@ -1,0 +1,393 @@
+<%- contentFor('title') %>
+Settings - Archon DNS
+
+<%- contentFor('body') %>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <div class="card mb-4">
+        <div class="card-header">
+          <h5 class="mb-0">DNS Server Settings</h5>
+        </div>
+        <div class="card-body">
+          <form id="dnsSettingsForm">
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <label for="dnsPort" class="form-label">DNS Port</label>
+                <input type="number" class="form-control" id="dnsPort" name="dnsPort" min="1" max="65535" required>
+                <div class="form-text">Default: 53 (requires root/admin privileges)</div>
+              </div>
+              <div class="col-md-6">
+                <label for="forwarder" class="form-label">DNS Forwarder</label>
+                <input type="text" class="form-control" id="forwarder" name="forwarder" placeholder="e.g., 8.8.8.8">
+                <div class="form-text">External DNS server for forwarding queries (leave empty to use system DNS)</div>
+              </div>
+            </div>
+            
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <label for="cacheSize" class="form-label">Cache Size</label>
+                <input type="number" class="form-control" id="cacheSize" name="cacheSize" min="0" required>
+                <div class="form-text">Maximum number of DNS records to cache (0 to disable caching)</div>
+              </div>
+              <div class="col-md-6">
+                <label for="cacheTtl" class="form-label">Cache TTL</label>
+                <div class="input-group">
+                  <input type="number" class="form-control" id="cacheTtl" name="cacheTtl" min="0" required>
+                  <span class="input-group-text">seconds</span>
+                </div>
+                <div class="form-text">Maximum time to keep records in cache (0 to use record's TTL)</div>
+              </div>
+            </div>
+            
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" id="enableIpv6" name="enableIpv6">
+                  <label class="form-check-label" for="enableIpv6">Enable IPv6 Support</label>
+                </div>
+                <div class="form-text">Respond to AAAA queries and use IPv6 for forwarding</div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" id="enableLogging" name="enableLogging" checked>
+                  <label class="form-check-label" for="enableLogging">Enable Query Logging</label>
+                </div>
+                <div class="form-text">Log all DNS queries for analysis and monitoring</div>
+              </div>
+            </div>
+            
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" id="enableBlocking" name="enableBlocking" checked>
+                  <label class="form-check-label" for="enableBlocking">Enable Domain Blocking</label>
+                </div>
+                <div class="form-text">Block domains based on configured rules</div>
+              </div>
+              <div class="col-md-6">
+                <label for="blockResponse" class="form-label">Block Response</label>
+                <select class="form-select" id="blockResponse" name="blockResponse">
+                  <option value="nxdomain">NXDOMAIN (Domain does not exist)</option>
+                  <option value="refused">REFUSED (Server refused to answer)</option>
+                  <option value="nodata">NODATA (Empty response)</option>
+                  <option value="localhost">Localhost (127.0.0.1)</option>
+                </select>
+                <div class="form-text">Response type for blocked domains</div>
+              </div>
+            </div>
+            
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+              <button type="submit" class="btn btn-primary" id="saveDnsSettingsBtn">
+                <i class="bi bi-save me-1"></i> Save DNS Settings
+              </button>
+              <button type="button" class="btn btn-outline-secondary" id="restartDnsBtn">
+                <i class="bi bi-arrow-clockwise me-1"></i> Restart DNS Server
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+      
+      <div class="card mb-4">
+        <div class="card-header">
+          <h5 class="mb-0">Web Interface Settings</h5>
+        </div>
+        <div class="card-body">
+          <form id="webSettingsForm">
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <label for="webPort" class="form-label">Web Port</label>
+                <input type="number" class="form-control" id="webPort" name="webPort" min="1" max="65535" required>
+                <div class="form-text">Port for the web interface (default: 3000)</div>
+              </div>
+              <div class="col-md-6">
+                <label for="sessionTimeout" class="form-label">Session Timeout</label>
+                <div class="input-group">
+                  <input type="number" class="form-control" id="sessionTimeout" name="sessionTimeout" min="1" required>
+                  <span class="input-group-text">minutes</span>
+                </div>
+                <div class="form-text">Time before user sessions expire</div>
+              </div>
+            </div>
+            
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" id="enableHttps" name="enableHttps">
+                  <label class="form-check-label" for="enableHttps">Enable HTTPS</label>
+                </div>
+                <div class="form-text">Use secure HTTPS for the web interface</div>
+              </div>
+              <div class="col-md-6" id="httpsSettingsGroup" style="display: none;">
+                <label for="certFile" class="form-label">Certificate File Path</label>
+                <input type="text" class="form-control" id="certFile" name="certFile">
+                <div class="mt-2">
+                  <label for="keyFile" class="form-label">Key File Path</label>
+                  <input type="text" class="form-control" id="keyFile" name="keyFile">
+                </div>
+              </div>
+            </div>
+            
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+              <button type="submit" class="btn btn-primary" id="saveWebSettingsBtn">
+                <i class="bi bi-save me-1"></i> Save Web Settings
+              </button>
+              <button type="button" class="btn btn-outline-secondary" id="restartWebBtn">
+                <i class="bi bi-arrow-clockwise me-1"></i> Restart Web Server
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+      
+      <div class="card">
+        <div class="card-header">
+          <h5 class="mb-0">Advanced Settings</h5>
+        </div>
+        <div class="card-body">
+          <form id="advancedSettingsForm">
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <label for="logRetention" class="form-label">Log Retention</label>
+                <div class="input-group">
+                  <input type="number" class="form-control" id="logRetention" name="logRetention" min="1" required>
+                  <span class="input-group-text">days</span>
+                </div>
+                <div class="form-text">Number of days to keep query logs</div>
+              </div>
+              <div class="col-md-6">
+                <label for="updateInterval" class="form-label">Block List Update Interval</label>
+                <div class="input-group">
+                  <input type="number" class="form-control" id="updateInterval" name="updateInterval" min="0" required>
+                  <span class="input-group-text">hours</span>
+                </div>
+                <div class="form-text">How often to update block lists (0 to disable auto-updates)</div>
+              </div>
+            </div>
+            
+            <div class="row mb-3">
+              <div class="col-md-12">
+                <label for="customBlockLists" class="form-label">Custom Block Lists URLs</label>
+                <textarea class="form-control" id="customBlockLists" name="customBlockLists" rows="3" placeholder="Enter one URL per line"></textarea>
+                <div class="form-text">External block lists to import (one URL per line)</div>
+              </div>
+            </div>
+            
+            <div class="row mb-3">
+              <div class="col-md-12">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" id="enableDebug" name="enableDebug">
+                  <label class="form-check-label" for="enableDebug">Enable Debug Mode</label>
+                </div>
+                <div class="form-text">Enable verbose logging for troubleshooting</div>
+              </div>
+            </div>
+            
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+              <button type="submit" class="btn btn-primary" id="saveAdvancedSettingsBtn">
+                <i class="bi bi-save me-1"></i> Save Advanced Settings
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Load settings when the page loads
+    loadSettings();
+    
+    // Toggle HTTPS settings visibility
+    document.getElementById('enableHttps').addEventListener('change', function() {
+      document.getElementById('httpsSettingsGroup').style.display = this.checked ? 'block' : 'none';
+    });
+    
+    // Form submission handlers
+    document.getElementById('dnsSettingsForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      saveSettings('dns');
+    });
+    
+    document.getElementById('webSettingsForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      saveSettings('web');
+    });
+    
+    document.getElementById('advancedSettingsForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      saveSettings('advanced');
+    });
+    
+    // Restart buttons
+    document.getElementById('restartDnsBtn').addEventListener('click', function() {
+      restartService('dns');
+    });
+    
+    document.getElementById('restartWebBtn').addEventListener('click', function() {
+      restartService('web');
+    });
+  });
+  
+  // Load settings from API
+  async function loadSettings() {
+    try {
+      const response = await fetch('/api/settings');
+      const data = await response.json();
+      
+      if (data.success) {
+        const settings = data.data;
+        
+        // DNS settings
+        document.getElementById('dnsPort').value = settings.dns.port || 53;
+        document.getElementById('forwarder').value = settings.dns.forwarder || '';
+        document.getElementById('cacheSize').value = settings.dns.cacheSize || 1000;
+        document.getElementById('cacheTtl').value = settings.dns.cacheTtl || 0;
+        document.getElementById('enableIpv6').checked = settings.dns.enableIpv6 || false;
+        document.getElementById('enableLogging').checked = settings.dns.enableLogging !== false;
+        document.getElementById('enableBlocking').checked = settings.dns.enableBlocking !== false;
+        document.getElementById('blockResponse').value = settings.dns.blockResponse || 'nxdomain';
+        
+        // Web settings
+        document.getElementById('webPort').value = settings.web.port || 3000;
+        document.getElementById('sessionTimeout').value = settings.web.sessionTimeout || 60;
+        document.getElementById('enableHttps').checked = settings.web.enableHttps || false;
+        document.getElementById('certFile').value = settings.web.certFile || '';
+        document.getElementById('keyFile').value = settings.web.keyFile || '';
+        document.getElementById('httpsSettingsGroup').style.display = settings.web.enableHttps ? 'block' : 'none';
+        
+        // Advanced settings
+        document.getElementById('logRetention').value = settings.advanced.logRetention || 30;
+        document.getElementById('updateInterval').value = settings.advanced.updateInterval || 24;
+        document.getElementById('customBlockLists').value = (settings.advanced.customBlockLists || []).join('\n');
+        document.getElementById('enableDebug').checked = settings.advanced.enableDebug || false;
+      } else {
+        showAlert('danger', 'Failed to load settings: ' + data.error);
+      }
+    } catch (error) {
+      showAlert('danger', 'Error loading settings: ' + error.message);
+    }
+  }
+  
+  // Save settings to API
+  async function saveSettings(section) {
+    try {
+      let settings = {};
+      
+      if (section === 'dns') {
+        settings = {
+          dns: {
+            port: parseInt(document.getElementById('dnsPort').value),
+            forwarder: document.getElementById('forwarder').value,
+            cacheSize: parseInt(document.getElementById('cacheSize').value),
+            cacheTtl: parseInt(document.getElementById('cacheTtl').value),
+            enableIpv6: document.getElementById('enableIpv6').checked,
+            enableLogging: document.getElementById('enableLogging').checked,
+            enableBlocking: document.getElementById('enableBlocking').checked,
+            blockResponse: document.getElementById('blockResponse').value
+          }
+        };
+      } else if (section === 'web') {
+        settings = {
+          web: {
+            port: parseInt(document.getElementById('webPort').value),
+            sessionTimeout: parseInt(document.getElementById('sessionTimeout').value),
+            enableHttps: document.getElementById('enableHttps').checked,
+            certFile: document.getElementById('certFile').value,
+            keyFile: document.getElementById('keyFile').value
+          }
+        };
+      } else if (section === 'advanced') {
+        const customBlockLists = document.getElementById('customBlockLists').value
+          .split('\n')
+          .filter(url => url.trim() !== '');
+        
+        settings = {
+          advanced: {
+            logRetention: parseInt(document.getElementById('logRetention').value),
+            updateInterval: parseInt(document.getElementById('updateInterval').value),
+            customBlockLists: customBlockLists,
+            enableDebug: document.getElementById('enableDebug').checked
+          }
+        };
+      }
+      
+      const response = await fetch('/api/settings', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(settings)
+      });
+      
+      const data = await response.json();
+      
+      if (data.success) {
+        showAlert('success', `${section.charAt(0).toUpperCase() + section.slice(1)} settings saved successfully`);
+        
+        // Ask if user wants to restart the service
+        if (section === 'dns' || section === 'web') {
+          if (confirm(`Settings saved. Do you want to restart the ${section.toUpperCase()} service to apply changes?`)) {
+            restartService(section);
+          }
+        }
+      } else {
+        showAlert('danger', `Failed to save ${section} settings: ${data.error}`);
+      }
+    } catch (error) {
+      showAlert('danger', `Error saving ${section} settings: ${error.message}`);
+    }
+  }
+  
+  // Restart service
+  async function restartService(service) {
+    try {
+      const button = document.getElementById(`restart${service.charAt(0).toUpperCase() + service.slice(1)}Btn`);
+      button.disabled = true;
+      button.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Restarting...';
+      
+      const response = await fetch(`/api/settings/restart-${service}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      
+      const data = await response.json();
+      
+      if (data.success) {
+        showAlert('success', `${service.toUpperCase()} service restarted successfully`);
+      } else {
+        showAlert('danger', `Failed to restart ${service.toUpperCase()} service: ${data.error}`);
+      }
+    } catch (error) {
+      showAlert('danger', `Error restarting ${service.toUpperCase()} service: ${error.message}`);
+    } finally {
+      const button = document.getElementById(`restart${service.charAt(0).toUpperCase() + service.slice(1)}Btn`);
+      button.disabled = false;
+      button.innerHTML = `<i class="bi bi-arrow-clockwise me-1"></i> Restart ${service.toUpperCase()} Server`;
+    }
+  }
+  
+  // Show alert message
+  function showAlert(type, message) {
+    const alertDiv = document.createElement('div');
+    alertDiv.className = `alert alert-${type} alert-dismissible fade show`;
+    alertDiv.role = 'alert';
+    alertDiv.innerHTML = `
+      ${message}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    `;
+    
+    document.querySelector('.card-header').after(alertDiv);
+    
+    // Auto-dismiss after 5 seconds
+    setTimeout(() => {
+      alertDiv.classList.remove('show');
+      setTimeout(() => alertDiv.remove(), 150);
+    }, 5000);
+  }
+</script>
